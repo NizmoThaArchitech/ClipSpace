@@ -1,0 +1,8 @@
+{
+  "name": "ClipSpace",
+  "description": "A full-stack social media app for sharing, selling, and buying b-roll clips amongst content creators and marketing teams. Includes a video conference room for collaboration.",
+  "requestFramePermissions": [
+    "camera",
+    "microphone"
+  ]
+}
