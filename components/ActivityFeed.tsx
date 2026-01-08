@@ -1,11 +1,6 @@
 
 import React, { useRef, useState, useEffect } from 'react';
 import { MOCK_ACTIVITIES, MOCK_USERS } from '../constants';
-import { UploadIcon } from './icons/UploadIcon';
-import { SparklesIcon } from './icons/SparklesIcon';
-import { HeartIcon } from './icons/HeartIcon';
-import { UserPlusIcon } from './icons/UserPlusIcon';
-import { MessageIcon } from './icons/MessageIcon';
 import { ChevronLeftIcon } from './icons/ChevronLeftIcon';
 import { ChevronRightIcon } from './icons/ChevronRightIcon';
 

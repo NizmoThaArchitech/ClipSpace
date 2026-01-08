@@ -1,12 +1,11 @@
 
 import React, { useState } from 'react';
 import type { View, Theme } from '../App';
-import { MOCK_VIDEO_CLIPS, MOCK_ACTIVITIES, MOCK_USERS, MOCK_GOALS, MOCK_DASHBOARD_MESSAGES } from '../constants';
+import { MOCK_ACTIVITIES, MOCK_GOALS, MOCK_DASHBOARD_MESSAGES } from '../constants';
 import { DollarIcon } from './icons/DollarIcon';
 import { TrendingUpIcon } from './icons/TrendingUpIcon';
 import { UsersIcon } from './icons/UsersIcon';
 import { UploadIcon } from './icons/UploadIcon';
-import EndorsementLevelIcon from './icons/EndorsementLevelIcon';
 import { CameraIcon } from './icons/CameraIcon';
 import { StarIcon } from './icons/StarIcon';
 import { MessageIcon } from './icons/MessageIcon';
@@ -156,7 +155,7 @@ const Dashboard: React.FC<DashboardProps> = ({ theme, setCurrentView }) => {
             </div>
             <div className="flex items-center gap-2 mt-4 sm:mt-0">
                 {['Revenue', 'Views', 'Sales'].map((tab) => (
-                    <button key={tab} onClick={() => setChartTab(tab as any)} className={`px-3 py-1 text-sm font-semibold rounded-md transition-colors ${chartTab === tab ? 'bg-indigo-600 text-white' : 'bg-gray-700/50 hover:bg-gray-700'}`}>
+                    <button key={tab} onClick={() => setChartTab(tab as 'Revenue' | 'Views' | 'Sales')} className={`px-3 py-1 text-sm font-semibold rounded-md transition-colors ${chartTab === tab ? 'bg-indigo-600 text-white' : 'bg-gray-700/50 hover:bg-gray-700'}`}>
                         {tab}
                     </button>
                 ))}

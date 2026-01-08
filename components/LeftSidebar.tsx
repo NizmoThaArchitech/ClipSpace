@@ -21,7 +21,7 @@ import { LiveIcon } from './icons/LiveIcon';
 import { PriceTagIcon } from './icons/PriceTagIcon';
 import { AffiliateIcon } from './icons/AffiliateIcon';
 import { ChevronDoubleLeftIcon } from './icons/ChevronDoubleLeftIcon';
-import { HandshakeIcon } from './icons/HandshakeIcon';
+
 import { CubeTransparentIcon } from './icons/CubeTransparentIcon';
 import { MusicalNoteIcon } from './icons/MusicalNoteIcon';
 

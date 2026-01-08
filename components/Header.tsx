@@ -4,11 +4,11 @@ import type { View, Theme } from '../App';
 import SearchBar from './SearchBar';
 import { ClipspaceLogo } from './icons/ClipspaceLogo';
 import { NotificationIcon } from './icons/NotificationIcon';
-import { MenuIcon } from './icons/MenuIcon';
-import { CloseIcon } from './icons/CloseIcon';
+
 import EndorsementLevelIcon from './icons/EndorsementLevelIcon';
 import ThemeToggle from './ThemeToggle';
 import MusicPlayerWidget from './MusicPlayerWidget';
+import FullScreenNav from './FullScreenNav';
 
 const EndorsementLever: React.FC<{ theme: Theme }> = ({ theme }) => {
     const currentUserEndorsements = 2845;
@@ -33,16 +33,16 @@ const LiveStatus: React.FC<{ theme: Theme }> = ({ theme }) => {
     const formattedDate = time.toLocaleDateString([], { month: 'short', day: 'numeric' });
 
     return (
-        <div className={`hidden lg:flex items-center space-x-3 px-3 py-1.5 rounded-lg ${theme === 'dark' ? 'bg-gray-700/50' : 'bg-gray-700'}`}>
+        <div className={`hidden lg:flex items-center space-x-3 px-2 py-1 ui-rounded-sm ${theme === 'dark' ? 'bg-gray-700/50' : 'bg-gray-700'}`}>
             <div className="flex items-center space-x-2">
                 <span className="relative flex h-2.5 w-2.5">
                     <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-red-400 opacity-75"></span>
                     <span className="relative inline-flex rounded-full h-2.5 w-2.5 bg-red-500"></span>
                 </span>
-                <span className="text-sm font-semibold text-red-400">LIVE</span>
+                <span className="ui-text-sm font-semibold text-red-400">LIVE</span>
             </div>
-            <span className="text-sm text-gray-400">{formattedTime}</span>
-            <span className="text-sm text-gray-400">{formattedDate}</span>
+            <span className="ui-text-sm text-gray-400">{formattedTime}</span>
+            <span className="ui-text-sm text-gray-400">{formattedDate}</span>
         </div>
     );
 };
@@ -57,7 +57,7 @@ interface HeaderProps {
 }
 
 const Header: React.FC<HeaderProps> = ({ isMenuOpen, setIsMenuOpen, setCurrentView, theme, setTheme }) => {
-  const [notificationStatus, setNotificationStatus] = useState<'new' | 'old' | 'todo' | 'none'>('new');
+  const [notificationStatus] = useState<'new' | 'old' | 'todo' | 'none'>('new');
 
   const statusColor = {
     new: 'bg-green-400',
@@ -70,18 +70,21 @@ const Header: React.FC<HeaderProps> = ({ isMenuOpen, setIsMenuOpen, setCurrentVi
   const iconBg = theme === 'dark' ? 'hover:bg-gray-700' : 'hover:bg-gray-600';
   const notificationRing = theme === 'dark' ? 'ring-gray-800' : 'ring-black';
 
+  const [showFullNav, setShowFullNav] = React.useState(false);
+
   return (
     <header className={`${headerBg} backdrop-blur-sm shadow-lg sticky top-0 z-40`}>
+      <FullScreenNav isOpen={showFullNav} onClose={() => setShowFullNav(false)} theme={theme} />
       <div className="w-full mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="flex items-center justify-between h-16">
+        <div className="flex items-center justify-between py-2">
           {/* Left Section: Logo */}
           <div className="flex items-center space-x-4">
             <div 
               className="flex-shrink-0 flex items-center space-x-2 cursor-pointer" 
               onClick={() => setCurrentView('feed')}
             >
-              <ClipspaceLogo className="h-10 w-10" theme={theme} />
-              <span className={`text-xl font-bold tracking-wider hidden sm:inline ${theme === 'dark' || theme === 'light' ? 'text-white' : 'text-black'}`}>
+              <ClipspaceLogo className="h-8 w-8" theme={theme} />
+              <span className={`text-lg font-bold tracking-wider hidden sm:inline ${theme === 'dark' || theme === 'light' ? 'text-white' : 'text-black'}`}>
                 Clip<span className={theme === 'dark' ? 'text-indigo-400' : 'text-red-500'}>Space</span>
               </span>
             </div>
@@ -98,18 +101,23 @@ const Header: React.FC<HeaderProps> = ({ isMenuOpen, setIsMenuOpen, setCurrentVi
             <ThemeToggle theme={theme} setTheme={setTheme} />
             <EndorsementLever theme={theme} />
             <LiveStatus theme={theme} />
-            <button className={`relative p-2 rounded-full ${iconColor} ${iconBg} focus:outline-none focus:ring-2 focus:ring-white`}>
+            <button className={`relative p-1.5 ui-rounded-full ${iconColor} ${iconBg} focus:outline-none focus:ring-2 focus:ring-white`}>
               <NotificationIcon className={`h-6 w-6 ${theme === 'light' ? 'text-yellow-400' : ''}`}/>
                {notificationStatus !== 'none' && (
                 <span className={`absolute top-2 right-2 block h-2 w-2 rounded-full ring-2 ${notificationRing} ${statusColor[notificationStatus]}`}></span>
               )}
             </button>
 
+            {/* Desktop Fullscreen Nav Button */}
+            <div className="hidden md:block">
+              <button onClick={() => setShowFullNav(true)} className="px-3 py-2 ui-rounded-lg bg-white/5 text-white hover:bg-white/10">Nav</button>
+            </div>
+
             {/* Mobile Menu Button */}
             <div className="md:hidden">
               <button 
                 onClick={() => setIsMenuOpen(!isMenuOpen)} 
-                className={`relative w-8 h-8 flex items-center justify-center text-white focus:outline-none z-50`}
+                className={`relative w-7 h-7 flex items-center justify-center text-white focus:outline-none z-50`}
                 aria-label="Toggle menu"
               >
                   <div className="flex flex-col items-center justify-center">

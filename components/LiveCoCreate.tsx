@@ -1,10 +1,7 @@
 
 import React, { useEffect, useRef, useState } from 'react';
 import { CameraIcon } from './icons/CameraIcon'; 
-import { MicIcon } from './icons/MicIcon';
-import { PhoneIcon } from './icons/PhoneIcon';
-import { MicOffIcon } from './icons/MicOffIcon';
-import { CameraOffIcon } from './icons/CameraOffIcon';
+
 import type { Theme, ShowReminder } from '../App';
 import type { User } from '../types';
 import { MOCK_USERS, MOCK_VIDEO_CLIPS } from '../constants';
@@ -12,16 +9,15 @@ import { LayoutSpeakerIcon } from './icons/LayoutSpeakerIcon';
 import { VolumeIcon } from './icons/VolumeIcon';
 import { DocumentTextIcon } from './icons/DocumentTextIcon';
 import { TeleprompterIcon } from './icons/TeleprompterIcon';
+import { MicOffIcon } from './icons/MicOffIcon';
 import { BellAlertIcon } from './icons/UserIcon';
-import { ArrowPathIcon } from './icons/ArrowPathIcon';
+
 import { MediaPlayerIcon } from './icons/MediaPlayerIcon';
 import { SparklesIcon } from './icons/SparklesIcon';
 import { UserSwitchIcon } from './icons/UserSwitchIcon';
 import { WaveformIcon } from './icons/WaveformIcon';
 import { PlusIcon } from './icons/PlusIcon';
-import { GripVerticalIcon } from './icons/GripVerticalIcon';
 import { GlobeAltIcon } from './icons/GlobeAltIcon';
-import { ShareIcon } from './icons/ShareIcon';
 import { SearchIcon } from './icons/SearchIcon';
 import { MusicalNoteIcon } from './icons/MusicalNoteIcon';
 import { EyeIcon } from './icons/EyeIcon';
@@ -106,7 +102,7 @@ const AudioVisualizer: React.FC<{ isPlaying: boolean, color?: string }> = ({ isP
 
 const SourceMonitor: React.FC<{ user: User; label: string; active?: boolean; preview?: boolean }> = ({ user, label, active, preview }) => (
     <div className={`relative aspect-video bg-black rounded-lg overflow-hidden border-2 ${active ? 'border-red-600 ring-2 ring-red-600/20' : preview ? 'border-green-500' : 'border-gray-800'}`}>
-        <img src={`https://picsum.photos/seed/${user.id}_uhd/1920/1080`} className={`w-full h-full object-cover transition-all duration-500 ${active ? 'brightness-110' : 'brightness-[0.3] grayscale'}`} />
+        <img src={`https://picsum.photos/seed/${user.id}_uhd/1920/1080`} alt={`${user.name} source monitor`} className={`w-full h-full object-cover transition-all duration-500 ${active ? 'brightness-110' : 'brightness-[0.3] grayscale'}`} />
         <div className="absolute top-2 left-2 flex items-center gap-1.5">
             <div className={`text-[8px] font-black px-2 py-0.5 rounded uppercase text-white ${active ? 'bg-red-600' : preview ? 'bg-green-500' : 'bg-gray-800/80'}`}>
                 {label} <span className="ml-1 opacity-50 tracking-widest text-[7px]">UHD</span>
@@ -157,7 +153,7 @@ const AITeleprompter: React.FC = () => {
     );
 };
 
-const LiveCoCreate: React.FC<{ theme: Theme, setReminder: (reminder: ShowReminder) => void }> = ({ theme, setReminder }) => {
+const LiveCoCreate: React.FC<{ theme: Theme, setReminder: (reminder: ShowReminder) => void }> = ({ theme: _theme, setReminder: _setReminder }) => {
   const [isSessionActive, setIsSessionActive] = useState(false);
   const [activeCamera, setActiveCamera] = useState(0);
   const [previewCamera, setPreviewCamera] = useState(1);
@@ -249,14 +245,14 @@ const LiveCoCreate: React.FC<{ theme: Theme, setReminder: (reminder: ShowReminde
 
                   <div className="col-span-6">
                       <div className="bg-black rounded-[3rem] border border-white/10 shadow-[0_30px_100px_rgba(0,0,0,0.8)] relative overflow-hidden group h-[600px]">
-                           <img src={`https://picsum.photos/seed/${MOCK_PARTICIPANTS[activeCamera].id}_pgm_uhd/1920/1080`} className="w-full h-full object-cover brightness-110" />
+                           <img src={`https://picsum.photos/seed/${MOCK_PARTICIPANTS[activeCamera].id}_pgm_uhd/1920/1080`} alt={`Program output - ${MOCK_PARTICIPANTS[activeCamera].name}`} className="w-full h-full object-cover brightness-110" />
                            <div className="absolute inset-0 bg-gradient-to-t from-black/90 via-transparent to-transparent"></div>
                            <div className="absolute top-10 left-10 flex flex-col gap-2">
                                 <div className="bg-red-600 text-white font-black px-6 py-2 rounded-xl text-xs animate-pulse tracking-[0.3em] uppercase shadow-2xl">On Air</div>
                                 <div className="text-[10px] font-black text-red-500 uppercase tracking-widest ml-1 italic">Master PGM Output</div>
                            </div>
                            <div className="absolute top-10 right-10 w-48 aspect-video bg-[#050505] border-2 border-green-500/50 rounded-2xl overflow-hidden shadow-2xl group-hover:scale-110 transition-transform duration-700">
-                                <img src={`https://picsum.photos/seed/${MOCK_PARTICIPANTS[previewCamera].id}_pvw_uhd/1920/1080`} className="w-full h-full object-cover grayscale opacity-60" />
+                                <img src={`https://picsum.photos/seed/${MOCK_PARTICIPANTS[previewCamera].id}_pvw_uhd/1920/1080`} alt={`Preview - ${MOCK_PARTICIPANTS[previewCamera].name}`} className="w-full h-full object-cover grayscale opacity-60" />
                                 <div className="absolute top-2 left-2 bg-green-600 text-white text-[8px] font-black px-2 py-0.5 rounded uppercase tracking-widest">PREVIEW</div>
                            </div>
                            <div className="absolute bottom-10 left-10 right-10 flex justify-between items-end">
@@ -292,7 +288,7 @@ const LiveCoCreate: React.FC<{ theme: Theme, setReminder: (reminder: ShowReminde
                                {MOCK_PARTICIPANTS.slice(1, 5).map(p => (
                                    <div key={p.id} className="flex items-center justify-between group p-2 hover:bg-white/[0.03] rounded-xl transition-all">
                                        <div className="flex items-center gap-3">
-                                            <img src={p.avatarUrl} className="w-10 h-10 rounded-xl border border-white/10 grayscale group-hover:grayscale-0" />
+                                            <img src={p.avatarUrl} alt={`${p.name} avatar`} className="w-10 h-10 rounded-xl border border-white/10 grayscale group-hover:grayscale-0" />
                                             <div><p className="text-[11px] font-black text-white uppercase">{p.name}</p><p className="text-[8px] text-indigo-500/60 font-bold">{p.role}</p></div>
                                        </div>
                                        <div className="w-1.5 h-1.5 bg-green-500 rounded-full shadow-[0_0_8px_rgba(34,197,94,0.6)]"></div>
@@ -317,7 +313,7 @@ const LiveCoCreate: React.FC<{ theme: Theme, setReminder: (reminder: ShowReminde
                       {['switcher', 'soundboard', 'meeting'].map((tool) => (
                         <button 
                             key={tool}
-                            onClick={() => setActiveStudioTool(tool as any)}
+                            onClick={() => setActiveStudioTool(tool as 'switcher' | 'soundboard' | 'meeting')}
                             className={`w-2.5 h-2.5 rounded-full transition-all duration-500 ${activeStudioTool === tool ? 'bg-indigo-500 ring-4 ring-indigo-500/20 scale-125' : 'bg-gray-800 hover:bg-gray-700'}`}
                         />
                       ))}
@@ -435,7 +431,7 @@ const LiveCoCreate: React.FC<{ theme: Theme, setReminder: (reminder: ShowReminde
                                     <div key={ch.id} className="flex group hover:bg-indigo-500/[0.04] transition-all h-32 items-stretch">
                                         {/* Station Column with Visualizer next to name */}
                                         <div className="w-[340px] flex-shrink-0 p-8 border-r border-white/10 flex items-center gap-6 bg-white/[0.01]">
-                                            <img src={ch.thumbnailUrl} className="w-16 h-16 rounded-2xl object-cover border border-white/10 shadow-2xl group-hover:scale-105 transition-transform" />
+                                            <img src={ch.thumbnailUrl} alt={`${ch.name} thumbnail`} className="w-16 h-16 rounded-2xl object-cover border border-white/10 shadow-2xl group-hover:scale-105 transition-transform" />
                                             <div className="min-w-0 flex-1 space-y-2">
                                                 <div className="flex items-center gap-3">
                                                     <p className="font-black text-white text-base tracking-tighter uppercase truncate">{ch.name}</p>
@@ -500,10 +496,10 @@ const LiveCoCreate: React.FC<{ theme: Theme, setReminder: (reminder: ShowReminde
                        {MOCK_VIDEO_CLIPS.slice(0, 4).map(clip => (
                            <div key={clip.id} className="space-y-4 group cursor-pointer relative">
                                <div className="relative aspect-[3/4] rounded-[3.5rem] overflow-hidden border-2 border-white/5 shadow-2xl transition-all duration-700 group-hover:border-indigo-500/50 scale-[0.98] group-hover:scale-100 bg-gray-900">
-                                   <img src={`https://picsum.photos/seed/${clip.id}_asset_uhd/1200/1600`} className="w-full h-full object-cover transition-transform duration-1000 group-hover:scale-110 brightness-75 group-hover:brightness-100" />
+                                   <img src={`https://picsum.photos/seed/${clip.id}_asset_uhd/1200/1600`} alt={`${clip.title} asset`} className="w-full h-full object-cover transition-transform duration-1000 group-hover:scale-110 brightness-75 group-hover:brightness-100" />
                                    <div className="absolute inset-0 bg-gradient-to-t from-black via-black/40 to-transparent p-10 flex flex-col justify-end">
                                         <div className="flex items-center gap-3 mb-3">
-                                            <div className="w-8 h-8 rounded-full border border-white/10 overflow-hidden"><img src={clip.creator.avatarUrl} className="w-full h-full object-cover" /></div>
+                                            <div className="w-8 h-8 rounded-full border border-white/10 overflow-hidden"><img src={clip.creator.avatarUrl} alt={`${clip.creator.name} avatar`} className="w-full h-full object-cover" /></div>
                                             <span className="text-[10px] font-black text-indigo-400 uppercase tracking-widest">{clip.creator.name}</span>
                                         </div>
                                        <p className="text-[18px] font-black text-white leading-tight uppercase tracking-tighter group-hover:text-indigo-400 transition-colors">{clip.title}</p>

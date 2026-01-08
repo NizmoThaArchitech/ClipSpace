@@ -6,7 +6,7 @@ import { HandshakeIcon } from './icons/HandshakeIcon';
 import { UsersIcon } from './icons/UsersIcon';
 import { SearchIcon } from './icons/SearchIcon';
 
-const CollabHub: React.FC<{ theme: Theme }> = ({ theme }) => {
+const CollabHub: React.FC<{ theme: Theme }> = ({ theme: _theme }) => {
     const [searchTerm, setSearchTerm] = useState('');
     const [roleFilter, setRoleFilter] = useState('All');
     const [compFilter, setCompFilter] = useState('All');

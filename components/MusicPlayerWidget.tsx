@@ -3,23 +3,24 @@ import React, { useState, useEffect } from 'react';
 import { MusicalNoteIcon } from './icons/MusicalNoteIcon';
 import { VolumeIcon } from './icons/VolumeIcon';
 
-const MusicPlayerWidget: React.FC<{ theme: 'dark' | 'light' }> = ({ theme }) => {
+const MusicPlayerWidget: React.FC<{ theme: 'dark' | 'light' }> = ({ theme: _theme }) => {
     const [isExpanded, setIsExpanded] = useState(false);
     const [isPlaying, setIsPlaying] = useState(false);
-    const [currentTrack, setCurrentTrack] = useState({
+    const [currentTrack, setCurrentTrack] = useState<{ title: string; artist: string; art: string }>({
         title: "Ambient Echoes",
         artist: "CSpace Records",
         art: "https://picsum.photos/seed/music/100/100"
     });
 
     useEffect(() => {
-        const handleShowAudio = (e: any) => {
-            setCurrentTrack(e.detail);
+        const handleShowAudio = (e: Event) => {
+            const ev = e as CustomEvent<{ title: string; artist: string; art: string }>;
+            setCurrentTrack(ev.detail);
             setIsPlaying(true);
             setIsExpanded(true);
         };
-        window.addEventListener('play-show-audio', handleShowAudio);
-        return () => window.removeEventListener('play-show-audio', handleShowAudio);
+        window.addEventListener('play-show-audio', handleShowAudio as EventListener);
+        return () => window.removeEventListener('play-show-audio', handleShowAudio as EventListener);
     }, []);
 
     const togglePlay = (e: React.MouseEvent) => {
@@ -56,7 +57,7 @@ const MusicPlayerWidget: React.FC<{ theme: 'dark' | 'light' }> = ({ theme }) => 
                         <button onClick={() => setIsExpanded(false)} className="text-gray-500 hover:text-white">&times;</button>
                     </div>
                     <div className="flex gap-4">
-                        <img src={currentTrack.art} className="w-20 h-20 rounded-2xl shadow-2xl object-cover border border-gray-800" />
+                        <img src={currentTrack.art} alt={`${currentTrack.title} cover`} className="w-20 h-20 rounded-2xl shadow-2xl object-cover border border-gray-800" />
                         <div className="flex-1 min-w-0">
                             <h4 className="font-black text-white text-sm truncate tracking-tight">{currentTrack.title}</h4>
                             <p className="text-xs text-gray-400 truncate font-bold">{currentTrack.artist}</p>
@@ -108,9 +109,9 @@ const AudioWave: React.FC<{ isPlaying: boolean }> = ({ isPlaying }) => (
     </div>
 );
 
-const PlayIcon = (props: any) => <svg {...props} fill="currentColor" viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg>;
-const PauseIcon = (props: any) => <svg {...props} fill="currentColor" viewBox="0 0 24 24"><path d="M6 19h4V5H6v14zm8-14v14h4V5h-4z"/></svg>;
-const PrevIcon = (props: any) => <svg {...props} fill="currentColor" viewBox="0 0 24 24"><path d="M6 6h2v12H6zm3.5 6L19 18V6z"/></svg>;
-const NextIcon = (props: any) => <svg {...props} fill="currentColor" viewBox="0 0 24 24"><path d="M6 18l8.5-6L6 6v12zM16 6v12h2V6h-2z"/></svg>;
+const PlayIcon = (props: React.SVGProps<SVGSVGElement>) => <svg {...props} fill="currentColor" viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg>;
+const PauseIcon = (props: React.SVGProps<SVGSVGElement>) => <svg {...props} fill="currentColor" viewBox="0 0 24 24"><path d="M6 19h4V5H6v14zm8-14v14h4V5h-4z"/></svg>;
+const PrevIcon = (props: React.SVGProps<SVGSVGElement>) => <svg {...props} fill="currentColor" viewBox="0 0 24 24"><path d="M6 6h2v12H6zm3.5 6L19 18V6z"/></svg>;
+const NextIcon = (props: React.SVGProps<SVGSVGElement>) => <svg {...props} fill="currentColor" viewBox="0 0 24 24"><path d="M6 18l8.5-6L6 6v12zM16 6v12h2V6h-2z"/></svg>;
 
 export default MusicPlayerWidget;

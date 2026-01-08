@@ -41,7 +41,7 @@ const MOCK_SPLIT_CONTRACTS: SplitContract[] = [
 ];
 
 
-const SplitsHub: React.FC<{ theme: Theme }> = ({ theme }) => {
+const SplitsHub: React.FC<{ theme: Theme }> = ({ theme: _theme }) => {
     
     const getStatusChip = (status: string) => {
         switch (status) {

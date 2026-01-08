@@ -8,9 +8,7 @@ import { DollarIcon } from './icons/DollarIcon';
 import { CursorClickIcon } from './icons/CursorClickIcon';
 import { UsersIcon } from './icons/UsersIcon';
 
-const AffiliateProgram: React.FC<{ theme: Theme }> = ({ theme }) => {
-    const isDark = theme === 'dark';
-    
+const AffiliateProgram: React.FC<{ theme: Theme }> = ({ theme: _theme }) => {
     const affiliateLink = "https://clipspace.io/join?ref=jane_creator";
     
     const copyLink = () => {

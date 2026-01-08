@@ -1,6 +1,6 @@
 
 import React, { useState } from 'react';
-import { MOCK_TRANSACTIONS, MOCK_SPLIT_CONTRACTS, MOCK_USERS } from '../constants';
+import { MOCK_TRANSACTIONS, MOCK_SPLIT_CONTRACTS } from '../constants';
 import { DownloadIcon } from './icons/DownloadIcon';
 import { ShoppingCartIcon } from './icons/ShoppingCartIcon';
 import { CreditCardIcon } from './icons/CreditCardIcon';
@@ -17,11 +17,11 @@ interface WalletProps {
 const SplitContractModal: React.FC<{ contract: SplitContract; onClose: () => void }> = ({ contract, onClose }) => {
     return (
         <div className="fixed inset-0 bg-black/80 backdrop-blur-md z-[100] flex items-center justify-center p-4">
-            <div className="bg-gray-900 border border-gray-800 rounded-3xl w-full max-w-2xl shadow-2xl overflow-hidden animate-fadeIn">
-                <div className="p-8 border-b border-gray-800 flex justify-between items-center bg-gray-800/30">
+            <div className="bg-gray-900 border border-gray-800 ui-rounded-4xl w-full max-w-2xl shadow-2xl overflow-hidden animate-fadeIn">
+                <div className="ui-card border-b border-gray-800 flex justify-between items-center bg-gray-800/30">
                     <div>
                         <h2 className="text-2xl font-black text-white tracking-tight">{contract.name}</h2>
-                        <p className="text-indigo-400 text-xs font-bold uppercase tracking-widest mt-1">Full Allocation Ledger</p>
+                        <p className="text-indigo-400 ui-text-xxs font-bold uppercase tracking-widest mt-1">Full Allocation Ledger</p>
                     </div>
                     <button onClick={onClose} className="p-2 bg-gray-800 rounded-xl hover:text-red-500 transition-colors">
                         <CloseIcon className="w-6 h-6" />
@@ -43,10 +43,10 @@ const SplitContractModal: React.FC<{ contract: SplitContract; onClose: () => voi
                         {contract.participants.map(p => (
                             <div key={p.user.id} className="flex items-center justify-between p-4 bg-gray-800/40 rounded-2xl border border-gray-700/50">
                                 <div className="flex items-center gap-4">
-                                    <img src={p.user.avatarUrl} alt={p.user.name} className="w-12 h-12 rounded-full border-2 border-indigo-500/30" />
+                                        <img src={p.user.avatarUrl} alt={p.user.name} className="ui-avatar-lg ui-rounded-full border-2 border-indigo-500/30" />
                                     <div>
                                         <p className="font-bold text-white text-lg">{p.user.name}</p>
-                                        <p className="text-xs text-gray-500 font-mono">STAKE: {p.share}%</p>
+                                        <p className="ui-text-xxs text-gray-500 font-mono">STAKE: {p.share}%</p>
                                     </div>
                                 </div>
                                 <div className="text-right">
@@ -58,14 +58,14 @@ const SplitContractModal: React.FC<{ contract: SplitContract; onClose: () => voi
                     </div>
                 </div>
                 <div className="p-8 bg-gray-800/30">
-                    <button onClick={onClose} className="w-full py-4 bg-indigo-600 hover:bg-indigo-500 text-white font-black rounded-2xl transition-all shadow-xl shadow-indigo-500/20">ACKNOWLEDGE LEDGER</button>
+                    <button onClick={onClose} className="w-full ui-btn ui-btn-lg bg-indigo-600 hover:bg-indigo-500 text-white font-black">ACKNOWLEDGE LEDGER</button>
                 </div>
             </div>
         </div>
     );
 };
 
-const Wallet: React.FC<WalletProps> = ({ theme }) => {
+const Wallet: React.FC<WalletProps> = ({ theme: _theme }) => {
   const [activeView, setActiveView] = useState<'balance' | 'splits'>('balance');
   const [selectedContract, setSelectedContract] = useState<SplitContract | null>(null);
 
@@ -97,19 +97,19 @@ const Wallet: React.FC<WalletProps> = ({ theme }) => {
       {selectedContract && <SplitContractModal contract={selectedContract} onClose={() => setSelectedContract(null)} />}
       <div className="flex flex-col md:flex-row justify-between md:items-end gap-4">
         <div>
-            <h1 className="text-4xl font-black text-white tracking-tighter">FINANCIAL <span className="text-indigo-500">OPERATIONS</span></h1>
+            <h1 className="text-3xl font-black text-white tracking-tighter">FINANCIAL <span className="text-indigo-500">OPERATIONS</span></h1>
             <p className="text-gray-300 mt-1 font-bold uppercase tracking-widest text-xs">Liquidity Management & Revenue Protocols</p>
         </div>
-        <div className="flex bg-gray-800/50 p-1 rounded-2xl border border-gray-600/30 backdrop-blur-sm">
+            <div className="flex bg-gray-800/50 p-1 ui-rounded-lg border border-gray-600/30 backdrop-blur-sm">
             <button 
                 onClick={() => setActiveView('balance')}
-                className={`px-6 py-2.5 text-sm font-black rounded-xl transition-all ${activeView === 'balance' ? 'bg-indigo-600 text-white shadow-lg shadow-indigo-500/30' : 'text-gray-400 hover:text-white'}`}
+                className={`ui-btn ui-btn-outline transition-all ${activeView === 'balance' ? 'bg-indigo-600 text-white shadow-lg shadow-indigo-500/30' : 'text-gray-400 hover:text-white'}`}
             >
                 PROTOCOL BALANCE
             </button>
             <button 
                 onClick={() => setActiveView('splits')}
-                className={`px-6 py-2.5 text-sm font-black rounded-xl transition-all ${activeView === 'splits' ? 'bg-indigo-600 text-white shadow-lg shadow-indigo-500/30' : 'text-gray-400 hover:text-white'}`}
+                className={`ui-btn ui-btn-outline transition-all ${activeView === 'splits' ? 'bg-indigo-600 text-white shadow-lg shadow-indigo-500/30' : 'text-gray-400 hover:text-white'}`}
             >
                 REVENUE PROTOCOLS
             </button>
@@ -120,7 +120,7 @@ const Wallet: React.FC<WalletProps> = ({ theme }) => {
         <div className="space-y-8 animate-fadeIn">
             {/* Balance & Payouts */}
             <div className="grid grid-cols-1 lg:grid-cols-3 gap-8">
-                <div className="lg:col-span-2 bg-gray-900 p-8 rounded-3xl shadow-2xl flex flex-col justify-between border border-gray-800 relative overflow-hidden group">
+                <div className="lg:col-span-2 bg-gray-900 ui-card ui-rounded-4xl shadow-2xl flex flex-col justify-between border border-gray-800 relative overflow-hidden group">
                 <div className="absolute -top-24 -right-24 w-64 h-64 bg-indigo-500/10 rounded-full blur-3xl group-hover:bg-indigo-500/20 transition-all duration-700"></div>
                 <div>
                     <p className="text-xs font-black text-gray-500 uppercase tracking-widest">Institutional Liquidity</p>
@@ -143,7 +143,7 @@ const Wallet: React.FC<WalletProps> = ({ theme }) => {
                             <div className="w-12 h-12 bg-blue-600 rounded-xl flex items-center justify-center font-black text-white text-xl">S</div>
                             <div>
                                 <p className="font-black text-white">STRIPE PROTOCOL</p>
-                                <p className="text-[10px] text-green-400 font-black uppercase tracking-widest">Primary Settlement</p>
+                                    <p className="ui-text-xxs text-green-400 font-black uppercase tracking-widest">Primary Settlement</p>
                             </div>
                         </div>
                         <button className="text-xs text-indigo-400 hover:text-indigo-300 font-black uppercase tracking-tighter underline">Edit</button>
@@ -159,7 +159,7 @@ const Wallet: React.FC<WalletProps> = ({ theme }) => {
                 <div className="bg-gray-900 rounded-3xl shadow-2xl overflow-hidden border border-gray-800">
                 <div className="overflow-x-auto">
                     <table className="w-full text-sm text-left text-gray-400">
-                    <thead className="text-[10px] text-gray-500 uppercase bg-gray-800/30 font-black tracking-widest">
+                    <thead className="ui-text-xxs text-gray-500 uppercase bg-gray-800/30 font-black tracking-widest">
                         <tr>
                         <th scope="col" className="px-10 py-6">Timestamp</th>
                         <th scope="col" className="px-10 py-6">Operation Type</th>

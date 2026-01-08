@@ -7,7 +7,7 @@ interface MusicConnectProps {
   theme: Theme;
 }
 
-const MusicConnect: React.FC<MusicConnectProps> = ({ platform, theme }) => {
+const MusicConnect: React.FC<MusicConnectProps> = ({ platform, theme: _theme }) => {
   const [isConnecting, setIsConnecting] = useState(false);
   const [isConnected, setIsConnected] = useState(false);
 

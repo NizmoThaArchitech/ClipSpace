@@ -1,10 +1,10 @@
 
-import React, { useState, useEffect, useRef } from 'react';
+import React, { useState, useEffect } from 'react';
 import type { Theme } from '../App.tsx';
+import type { VideoClip } from '../types';
 import { MOCK_VIDEO_CLIPS, MOCK_USERS, STYLE_PRESETS } from '../constants.ts';
 import { SparklesIcon } from './icons/SparklesIcon.tsx';
 import { CubeTransparentIcon } from './icons/CubeTransparentIcon.tsx';
-import { FilmIcon } from './icons/FilmIcon.tsx';
 import { PaintBrushIcon } from './icons/PaintBrushIcon.tsx';
 import { MusicalNoteIcon } from './icons/MusicalNoteIcon.tsx';
 import { GripVerticalIcon } from './icons/GripVerticalIcon.tsx';
@@ -25,15 +25,15 @@ const loadingStates = [
     { state: 'interpolating_motion', message: 'Applying motion vectors...' },
 ];
 
-const CSpaceVideoSuite: React.FC<{ theme: Theme }> = ({ theme }) => {
-    const [uploadedClip, setUploadedClip] = useState<any | null>(null);
+const CSpaceVideoSuite: React.FC<{ theme: Theme }> = ({ theme: _theme }) => {
+    const [uploadedClip, setUploadedClip] = useState<VideoClip | null>(null);
     const [prompt, setPrompt] = useState('');
     const [soundDesignPrompt, setSoundDesignPrompt] = useState('');
     const [generationState, setGenerationState] = useState('idle');
-    const [generatedClip, setGeneratedClip] = useState<any | null>(null);
-    const [loadingMessage, setLoadingMessage] = useState('');
+    const [, setGeneratedClip] = useState<VideoClip | null>(null);
+    const [, setLoadingMessage] = useState('');
     const [activeTab, setActiveTab] = useState<'edit' | 'style' | 'audio' | 'generate'>('edit');
-    const [timelineClips, setTimelineClips] = useState<any[]>([]);
+    const [timelineClips, setTimelineClips] = useState<VideoClip[]>([]);
     const [generatedWaveform, setGeneratedWaveform] = useState(false);
     const [showHeatmap, setShowHeatmap] = useState(false);
     const [isSidebarExpanded, setIsSidebarExpanded] = useState(true);
@@ -174,7 +174,7 @@ const CSpaceVideoSuite: React.FC<{ theme: Theme }> = ({ theme }) => {
                                              {['Cinematic', 'Vintage', 'Abstract'].map(style => (
                                                  <button 
                                                     key={style}
-                                                    onClick={() => setRecordingStyle(style as any)}
+                                                    onClick={() => setRecordingStyle(style as 'Cinematic' | 'Vintage' | 'Abstract')}
                                                     className={`px-8 py-4 rounded-2xl font-black border-4 transition-all ${recordingStyle === style ? 'bg-indigo-600 border-white text-white scale-110 shadow-2xl' : 'bg-black/60 border-indigo-500/40 text-indigo-400 hover:border-indigo-400'}`}
                                                  >
                                                      {style}
@@ -213,7 +213,7 @@ const CSpaceVideoSuite: React.FC<{ theme: Theme }> = ({ theme }) => {
                             <div className="flex-1 bg-black/40 rounded-xl flex items-center gap-3 overflow-x-auto no-scrollbar p-3 border border-gray-800/50">
                                 {timelineClips.length > 0 ? timelineClips.map((clip, idx) => (
                                     <div key={idx} className="flex-shrink-0 w-48 h-full bg-gray-800 rounded-lg border border-gray-700 flex flex-col p-1.5 relative group cursor-grab active:cursor-grabbing shadow-lg">
-                                        <img src={clip.thumbnailUrl} className="w-full h-20 object-cover rounded-md" />
+                                        <img src={clip.thumbnailUrl} alt={clip.title} className="w-full h-20 object-cover rounded-md" />
                                         <p className="text-[10px] font-bold text-gray-300 mt-1.5 truncate">{clip.title}</p>
                                         <div className="absolute -left-1 top-0 bottom-0 flex items-center opacity-0 group-hover:opacity-100"><GripVerticalIcon className="w-3 text-gray-600"/></div>
                                     </div>
@@ -245,7 +245,7 @@ const CSpaceVideoSuite: React.FC<{ theme: Theme }> = ({ theme }) => {
                                         <div className="grid grid-cols-2 gap-3">
                                             {STYLE_PRESETS.map(s => (
                                                 <button key={s.name} className="group relative aspect-video rounded-xl overflow-hidden border border-gray-800 hover:border-indigo-500 transition-all shadow-lg">
-                                                    <img src={s.thumbnailUrl} className="w-full h-full object-cover grayscale group-hover:grayscale-0 transition-all duration-700" />
+                                                    <img src={s.thumbnailUrl} alt={s.name} className="w-full h-full object-cover grayscale group-hover:grayscale-0 transition-all duration-700" />
                                                     <div className="absolute inset-0 bg-black/60 opacity-0 group-hover:opacity-100 flex items-center justify-center transition-opacity">
                                                         <span className="text-[10px] font-black text-white uppercase tracking-widest">{s.name}</span>
                                                     </div>

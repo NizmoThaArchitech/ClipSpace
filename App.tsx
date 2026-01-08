@@ -1,5 +1,5 @@
 
-import React, { useState, useEffect } from 'react';
+import React, { useState } from 'react';
 import Header from './components/Header';
 import Upload from './components/Upload';
 import LeftSidebar from './components/LeftSidebar';
@@ -24,9 +24,7 @@ import Syndication from './components/Syndication';
 import CSpaceVideoSuite from './components/ClipGenStudio';
 import Footer from './components/Footer';
 import PricingPage from './components/PricingPage';
-import LegalPage from './components/LegalPage';
 import MusicConnect from './components/MusicConnect';
-import { LEGAL_CONTENT } from './constants';
 import { ChevronDoubleRightIcon } from './components/icons/ChevronDoubleRightIcon';
 import { ChevronDoubleLeftIcon } from './components/icons/ChevronDoubleLeftIcon';
 import { CloseIcon } from './components/icons/CloseIcon';
@@ -118,7 +116,7 @@ const App: React.FC = () => {
             <button onClick={() => setIsLeftSidebarVisible(true)} className="hidden md:block fixed top-1/2 -translate-y-1/2 left-0 z-30 bg-gray-800/80 hover:bg-indigo-600 p-2 rounded-r-lg" title="Show Sidebar"><ChevronDoubleRightIcon className="w-5 h-5 text-white"/></button>
           )}
           
-          <main className={`flex-1 min-w-0 overflow-y-auto ${theme === 'dark' ? 'bg-gray-900' : 'bg-white'}`}>
+          <main className={`flex-1 min-w-0 overflow-y-auto pb-24 ${theme === 'dark' ? 'bg-gray-900' : 'bg-white'}`}>
             {renderContent()}
           </main>
 
@@ -140,7 +138,7 @@ const App: React.FC = () => {
              <button onClick={() => setReminder(null)} className="text-gray-500 hover:text-white bg-gray-800 p-1 rounded-full transition-colors"><CloseIcon className="w-4 h-4"/></button>
           </div>
           <div className="flex gap-4">
-             <img src={reminder.thumbnail} className="w-20 h-20 rounded-2xl object-cover border border-gray-700 shadow-xl" />
+             <img src={reminder.thumbnail} alt={reminder.title} className="w-20 h-20 rounded-2xl object-cover border border-gray-700 shadow-xl" />
              <div className="flex-1 min-w-0">
                 <h4 className="font-black text-white text-sm truncate tracking-tight">{reminder.title}</h4>
                 <p className="text-[10px] text-indigo-400 font-black uppercase tracking-widest mt-1">{reminder.time} BROADCAST</p>

@@ -1,16 +1,17 @@
 
-import React, { useState, useEffect } from 'react';
+import React, { useState } from 'react';
 import type { Theme } from '../App';
+import type { VideoClip } from '../types';
 import { MOCK_VIDEO_CLIPS } from '../constants';
 import { ShareIcon } from './icons/ShareIcon';
 import { SparklesIcon } from './icons/SparklesIcon';
 import { GlobeAltIcon } from './icons/GlobeAltIcon';
 import { TrendingUpIcon } from './icons/TrendingUpIcon';
 
-const Syndication: React.FC<{ theme: Theme }> = ({ theme }) => {
-    const [selectedClip, setSelectedClip] = useState<any | null>(null);
+const Syndication: React.FC<{ theme: Theme }> = ({ theme: _theme }) => {
+    const [selectedClip, setSelectedClip] = useState<VideoClip | null>(null);
     const [isSyndicating, setIsSyndicating] = useState(false);
-    const [tickerItems, setTickerItems] = useState([
+    const [tickerItems] = useState([
         "New York Node: Assets transmitted successfully (99.8% quality)",
         "London Node: Ready for localized distribution",
         "Tokyo Node: AI Reframe processing (Aspect Ratio 9:16)",

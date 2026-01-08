@@ -18,7 +18,7 @@ interface MainFeedProps {
   setCurrentView: (view: View) => void;
 }
 
-const MainFeed: React.FC<MainFeedProps> = ({ setCurrentView, theme }) => {
+const MainFeed: React.FC<MainFeedProps> = ({ setCurrentView, theme: _theme }) => {
   const [sortOrder, setSortOrder] = useState('newest');
   const creators = Object.values(MOCK_USERS);
   const topCreator = [...creators].sort((a, b) => (b.endorsements || 0) - (a.endorsements || 0))[0];
@@ -53,6 +53,9 @@ const MainFeed: React.FC<MainFeedProps> = ({ setCurrentView, theme }) => {
       {/* ACTIVITY FEED */}
       <ActivityFeed />
 
+      {/* EXPLORE CREATORS SECTION */}
+      <CreatorShowcase creators={creators} setCurrentView={setCurrentView} />
+
       {/* MARKETPLACE SECTION */}
       <section id="marketplace-section" className="pt-4">
         <div className="flex flex-col sm:flex-row justify-between items-start sm:items-center mb-6 gap-4">
@@ -76,9 +79,6 @@ const MainFeed: React.FC<MainFeedProps> = ({ setCurrentView, theme }) => {
 
       {/* TRENDING CONTENT SECTION */}
       <TrendingContent clips={MOCK_TRENDING_CLIPS} setCurrentView={setCurrentView} />
-
-      {/* EXPLORE CREATORS SECTION */}
-      <CreatorShowcase creators={creators} setCurrentView={setCurrentView} />
 
       {/* TOP/FEATURED CREATOR SECTION */}
       <FeaturedCreator creator={topCreator} setCurrentView={setCurrentView} />

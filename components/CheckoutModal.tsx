@@ -16,7 +16,7 @@ interface CheckoutModalProps {
   theme: Theme;
 }
 
-const CheckoutModal: React.FC<CheckoutModalProps> = ({ listing, onClose, theme }) => {
+const CheckoutModal: React.FC<CheckoutModalProps> = ({ listing, onClose, theme: _theme }) => {
     const [selectedLicense, setSelectedLicense] = useState<LicenseTier | null>(listing.licenseTiers?.[0] || null);
     const [paymentStep, setPaymentStep] = useState<'details' | 'processing' | 'success'>('details');
 
