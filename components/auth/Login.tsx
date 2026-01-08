@@ -119,7 +119,8 @@ const VideoBackground: React.FC = () => {
 
   // Visual tuning
   const blur = typeof window !== 'undefined' && window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches ? '0px' : '6px';
-  const tintOpacity = 0.55;
+  // reduced tint so the overlay can show through more clearly
+  const tintOpacity = 0.38;
   const scale = 1.04;
 
   // Flow overlay component — prefer AI-upscaled overlay, then Pillow 4x, then the original
@@ -173,11 +174,21 @@ const VideoBackground: React.FC = () => {
               {!prefersReduced && <feTurbulence type="fractalNoise" baseFrequency="0.01 0.02" numOctaves="2" seed="5">
                 <animate attributeName="baseFrequency" dur="18s" values="0.01 0.02;0.02 0.01;0.01 0.02" repeatCount="indefinite" />
               </feTurbulence>}
-              <feDisplacementMap in="SourceGraphic" in2="turb" scale="30" xChannelSelector="R" yChannelSelector="G" />
+              <feDisplacementMap in="SourceGraphic" in2="turb" scale="48" xChannelSelector="R" yChannelSelector="G" />
             </filter>
           </defs>
 
-          <image href={overlaySrc} x="0" y="0" width="100%" height="100%" preserveAspectRatio="xMidYMid slice" filter="url(#flowFilter)" opacity="0.5" />
+          <image
+            href={overlaySrc}
+            x="0"
+            y="0"
+            width="100%"
+            height="100%"
+            preserveAspectRatio="xMidYMid slice"
+            filter="url(#flowFilter)"
+            opacity="0.85"
+            style={{ mixBlendMode: 'screen' }}
+          />
         </svg>
       </div>
     );
