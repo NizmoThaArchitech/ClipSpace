@@ -113,8 +113,8 @@ const VideoBackground: React.FC = () => {
     return () => window.removeEventListener('mousemove', onMove);
   }, []);
 
-  // default fallbacks - use a public sample if no local upload exists
-  const primary = src ?? 'https://test-videos.co.uk/vids/bigbuckbunny/mp4/h264/360/Big_Buck_Bunny_360_10s_1MB.mp4';
+  // default fallbacks - prefer the project's original background video if no local upload exists
+  const primary = src ?? '/uploads/bg-medium-flow.mp4';
   const fallbackImage = '/images/bg-FbW.jpg';
 
   // Visual tuning
