@@ -195,7 +195,7 @@ const VideoBackground: React.FC = () => {
   };
 
   return (
-    <div ref={wrapperRef as any} className="absolute inset-0 -z-10 overflow-hidden" style={{ willChange: 'transform', ['--tx' as any]: '0px', ['--ty' as any]: '0px' }}>
+    <div ref={wrapperRef as any} className="absolute inset-0 z-0 overflow-hidden" style={{ willChange: 'transform', ['--tx' as any]: '0px', ['--ty' as any]: '0px' }}>
       <div className="absolute inset-0 transform-gpu" style={{ transform: 'translate3d(var(--tx, 0px), var(--ty, 0px), 0) scale(1.04)', transition: 'transform 800ms cubic-bezier(.2,.8,.2,1)' }}>
         <video
           ref={videoRef as any}
