@@ -76,6 +76,13 @@ jobs:
         shell: bash
       - name: Check model URL
         run: python scripts/check_weights.py --model https://github.com/xinntao/Real-ESRGAN/releases/download/v0.3.0/RealESRGAN_x4plus.pth
+      - name: Show pyright & python info
+        run: |
+          python -m pyright --version || true
+          python -c "import sys; print('python', sys.version)"
+          python -c "import platform; print('platform:', platform.platform())"
+          python -c "import os; print('PYRIGHT_PYTHON_FORCE_VERSION=', os.environ.get('PYRIGHT_PYTHON_FORCE_VERSION'))"
+        shell: bash
       - name: Run simple static checks
         run: python -m pyright --warnings
 
