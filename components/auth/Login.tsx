@@ -137,7 +137,7 @@ const VideoBackground: React.FC = () => {
           muted
           loop
           preload="auto"
-          style={{ filter: `blur(${blur})`, transform: `scale(${scale})` }}
+          style={{ filter: `blur(${blur})`, transform: `scale(${scale})`, opacity: 1 }}
           onError={() => {
             console.warn('[VideoBackground] video failed to load', primary);
             setFailed(true);
