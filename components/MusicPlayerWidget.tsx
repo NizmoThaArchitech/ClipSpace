@@ -57,7 +57,7 @@ const MusicPlayerWidget: React.FC<{ theme: 'dark' | 'light' }> = ({ theme: _them
                         <button onClick={() => setIsExpanded(false)} className="text-gray-500 hover:text-white">&times;</button>
                     </div>
                     <div className="flex gap-4">
-                        <img src={currentTrack.art} className="w-20 h-20 rounded-2xl shadow-2xl object-cover border border-gray-800" />
+                        <img src={currentTrack.art} alt={`${currentTrack.title} cover`} className="w-20 h-20 rounded-2xl shadow-2xl object-cover border border-gray-800" />
                         <div className="flex-1 min-w-0">
                             <h4 className="font-black text-white text-sm truncate tracking-tight">{currentTrack.title}</h4>
                             <p className="text-xs text-gray-400 truncate font-bold">{currentTrack.artist}</p>

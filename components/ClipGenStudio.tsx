@@ -213,7 +213,7 @@ const CSpaceVideoSuite: React.FC<{ theme: Theme }> = ({ theme: _theme }) => {
                             <div className="flex-1 bg-black/40 rounded-xl flex items-center gap-3 overflow-x-auto no-scrollbar p-3 border border-gray-800/50">
                                 {timelineClips.length > 0 ? timelineClips.map((clip, idx) => (
                                     <div key={idx} className="flex-shrink-0 w-48 h-full bg-gray-800 rounded-lg border border-gray-700 flex flex-col p-1.5 relative group cursor-grab active:cursor-grabbing shadow-lg">
-                                        <img src={clip.thumbnailUrl} className="w-full h-20 object-cover rounded-md" />
+                                        <img src={clip.thumbnailUrl} alt={clip.title} className="w-full h-20 object-cover rounded-md" />
                                         <p className="text-[10px] font-bold text-gray-300 mt-1.5 truncate">{clip.title}</p>
                                         <div className="absolute -left-1 top-0 bottom-0 flex items-center opacity-0 group-hover:opacity-100"><GripVerticalIcon className="w-3 text-gray-600"/></div>
                                     </div>
@@ -245,7 +245,7 @@ const CSpaceVideoSuite: React.FC<{ theme: Theme }> = ({ theme: _theme }) => {
                                         <div className="grid grid-cols-2 gap-3">
                                             {STYLE_PRESETS.map(s => (
                                                 <button key={s.name} className="group relative aspect-video rounded-xl overflow-hidden border border-gray-800 hover:border-indigo-500 transition-all shadow-lg">
-                                                    <img src={s.thumbnailUrl} className="w-full h-full object-cover grayscale group-hover:grayscale-0 transition-all duration-700" />
+                                                    <img src={s.thumbnailUrl} alt={s.name} className="w-full h-full object-cover grayscale group-hover:grayscale-0 transition-all duration-700" />
                                                     <div className="absolute inset-0 bg-black/60 opacity-0 group-hover:opacity-100 flex items-center justify-center transition-opacity">
                                                         <span className="text-[10px] font-black text-white uppercase tracking-widest">{s.name}</span>
                                                     </div>

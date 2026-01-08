@@ -67,7 +67,7 @@ const ProjectTaskCard: React.FC<{ task: ProjectTask, onDelete: (id: string) => v
             
             <div className="mt-6 pt-4 border-t border-gray-800 flex justify-between items-center">
                 <div className="flex -space-x-2">
-                    {task.assignees?.map(a => <img key={a.id} src={a.avatarUrl} className="w-8 h-8 rounded-full border-2 border-gray-900" title={a.name}/>)}
+                    {task.assignees?.map(a => <img key={a.id} src={a.avatarUrl} alt={`${a.name} avatar`} className="w-8 h-8 rounded-full border-2 border-gray-900" title={a.name}/>)}
                 </div>
                 <div className="flex items-center gap-2 text-[10px] font-black text-gray-500 uppercase">
                     <FlagIcon className={`w-3 h-3 ${task.priority === 'High' ? 'text-red-500' : task.priority === 'Medium' ? 'text-orange-500' : 'text-gray-600'}`} />
