@@ -123,76 +123,7 @@ const VideoBackground: React.FC = () => {
   const tintOpacity = 0.38;
   const scale = 1.04;
 
-  // Flow overlay component — prefer AI-upscaled overlay, then Pillow 4x, then the original
-  const FlowOverlay: React.FC = () => {
-    const prefersReduced = typeof window !== 'undefined' && window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
-    // Prefer the AI-upscaled overlay by default for immediate preview
-    const [overlaySrc, setOverlaySrc] = useState<string>('/images/flow-overlay-4k-realesrgan.jpg');
-
-    useEffect(() => {
-      let mounted = true;
-      const candidates = [
-        '/images/flow-overlay-4k-realesrgan.jpg',
-        '/images/flow-overlay-4k.jpg',
-        '/images/flow-overlay.jpg',
-      ];
-
-      (async () => {
-        for (const p of candidates) {
-          try {
-            // Prefer a cheap HEAD request first
-            const res = await fetch(p, { method: 'HEAD' });
-            if (res && res.ok) {
-              if (!mounted) return;
-              setOverlaySrc(p);
-              return;
-            }
-            // Some hosts may not support HEAD; try GET as a final attempt
-            const res2 = await fetch(p, { method: 'GET' });
-            if (res2 && res2.ok) {
-              if (!mounted) return;
-              setOverlaySrc(p);
-              return;
-            }
-          } catch (err) {
-            // ignore and try next candidate
-          }
-        }
-      })();
-
-      return () => {
-        mounted = false;
-      };
-    }, []);
-
-    return (
-      <div aria-hidden className="absolute inset-0 z-[5] pointer-events-none">
-        <svg className="w-full h-full" preserveAspectRatio="none" viewBox="0 0 1920 1080" xmlns="http://www.w3.org/2000/svg" role="img" aria-hidden>
-          <defs>
-            <filter id="flowFilter">
-              <feTurbulence type="fractalNoise" baseFrequency="0.01 0.02" numOctaves="2" seed="3" result="turb" />
-              {!prefersReduced && <feTurbulence type="fractalNoise" baseFrequency="0.01 0.02" numOctaves="2" seed="5">
-                <animate attributeName="baseFrequency" dur="18s" values="0.01 0.02;0.02 0.01;0.01 0.02" repeatCount="indefinite" />
-              </feTurbulence>}
-              <feDisplacementMap in="SourceGraphic" in2="turb" scale="48" xChannelSelector="R" yChannelSelector="G" />
-            </filter>
-          </defs>
-
-          <image
-            href={overlaySrc}
-            x="0"
-            y="0"
-            width="100%"
-            height="100%"
-            preserveAspectRatio="xMidYMid slice"
-            filter="url(#flowFilter)"
-            opacity="0.85"
-            style={{ mixBlendMode: 'screen' }}
-          />
-        </svg>
-      </div>
-    );
-  };
+  // Overlay removed per request — show only uploaded/default video (tint remains)
 
   return (
     <div ref={wrapperRef as any} className="absolute inset-0 z-0 overflow-hidden" style={{ willChange: 'transform', ['--tx' as any]: '0px', ['--ty' as any]: '0px' }}>
@@ -217,8 +148,7 @@ const VideoBackground: React.FC = () => {
         </video>
       </div>
 
-      {/* Flow overlay (subtle animated displacement) */}
-      <FlowOverlay />
+      {/* Overlay removed — only video + tint will render */}
 
       {/* dark tint to keep foreground legible; small backdrop blur for depth */}
       <div className="absolute inset-0" style={{ backgroundColor: `rgba(0,0,0,${tintOpacity})`, backdropFilter: 'blur(2px)' }} aria-hidden />
