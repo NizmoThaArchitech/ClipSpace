@@ -1,0 +1,14 @@
+# Code owners — used to assign reviewers automatically
+# Format: <pattern> <owner> [owner...]
+
+# Owners for auth UI
+/components/auth/ @NizmoThaArchitech @nkrowd
+
+# Owners for AI tooling and scripts
+/scripts/ @NizmoThaArchitech
+
+# Owners for infrastructure & CI
+.github/ @NizmoThaArchitech
+
+# Fallback owner for anything else
+* @NizmoThaArchitech
