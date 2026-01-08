@@ -57,14 +57,12 @@ jobs:
         uses: actions/setup-python@v4
         with:
           python-version: '3.11'
-      - name: Create venv
-        run: python -m venv .venv_realesrgan311
       - name: Install requirements
-        run: .venv_realesrgan311\Scripts\python -m pip install --upgrade pip && .venv_realesrgan311\Scripts\python -m pip install -r requirements.txt
+        run: python -m pip install --upgrade pip && python -m pip install -r requirements.txt
       - name: Check model URL
-        run: .venv_realesrgan311\Scripts\python scripts/check_weights.py --model https://github.com/xinntao/Real-ESRGAN/releases/download/v0.3.0/RealESRGAN_x4plus.pth
+        run: python scripts/check_weights.py --model https://github.com/xinntao/Real-ESRGAN/releases/download/v0.3.0/RealESRGAN_x4plus.pth
       - name: Run simple static checks
-        run: .venv_realesrgan311\Scripts\python -m pyright --verifytypes
+        run: python -m pyright --verifytypes
 
   build:
     name: Build
