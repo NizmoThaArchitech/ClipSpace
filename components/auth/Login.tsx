@@ -119,8 +119,8 @@ const VideoBackground: React.FC = () => {
 
   // Visual tuning
   const blur = typeof window !== 'undefined' && window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches ? '0px' : '6px';
-  // reduced tint so the overlay can show through more clearly
-  const tintOpacity = 0.38;
+  // 75% dark tint requested
+  const tintOpacity = 0.75;
   const scale = 1.04;
 
   // Overlay removed per request — show only uploaded/default video (tint remains)
@@ -158,7 +158,7 @@ const VideoBackground: React.FC = () => {
         aria-hidden
         className="absolute inset-0 pointer-events-none"
         style={{
-          backgroundImage: `linear-gradient(rgba(0,0,0,0.55), rgba(0,0,0,0.55)), url('/images/flow-overlay.jpg')`,
+          backgroundImage: `linear-gradient(rgba(0,0,0,0.75), rgba(0,0,0,0.75)), url('/images/flow-overlay.jpg')`,
           backgroundSize: 'cover',
           backgroundPosition: 'center',
           backgroundRepeat: 'no-repeat',
