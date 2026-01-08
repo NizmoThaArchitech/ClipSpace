@@ -153,6 +153,19 @@ const VideoBackground: React.FC = () => {
       {/* dark tint to keep foreground legible; small backdrop blur for depth */}
       <div className="absolute inset-0" style={{ backgroundColor: `rgba(0,0,0,${tintOpacity})`, backdropFilter: 'blur(2px)' }} aria-hidden />
 
+      {/* Blended overlay image (user-provided) */}
+      <div
+        aria-hidden
+        className="absolute inset-0 pointer-events-none"
+        style={{
+          backgroundImage: `url('/images/flow-overlay.jpg')`,
+          backgroundSize: 'cover',
+          backgroundPosition: 'center',
+          opacity: 0.9,
+          mixBlendMode: 'screen',
+        }}
+      />
+
       {/* fallback background image for platforms that can't play the video */}
       <div aria-hidden className="absolute inset-0 -z-20 bg-cover bg-center bg-no-repeat" style={{ backgroundImage: `url('${fallbackImage}')`, filter: `blur(${blur})`, opacity: failed ? 1 : 0 }} />
 
