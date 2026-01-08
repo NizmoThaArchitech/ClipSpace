@@ -57,8 +57,23 @@ jobs:
         uses: actions/setup-python@v4
         with:
           python-version: '3.11'
-      - name: Install requirements
-        run: python -m pip install --upgrade pip && python -m pip install -r requirements.txt
+      - name: Install requirements (verbose + retry)
+        run: |
+          set -euo pipefail
+          python -m pip install --upgrade pip setuptools wheel
+          MAX=3
+          for i in $(seq 1 $MAX); do
+            echo "Attempt $i of $MAX: pip install requirements"
+            if python -m pip install -r requirements.txt --verbose --no-cache-dir; then
+              echo "pip install succeeded"
+              exit 0
+            fi
+            echo "pip install failed, sleeping and retrying..."
+            sleep $((i*5))
+          done
+          echo "pip install failed after $MAX attempts"
+          exit 1
+        shell: bash
       - name: Check model URL
         run: python scripts/check_weights.py --model https://github.com/xinntao/Real-ESRGAN/releases/download/v0.3.0/RealESRGAN_x4plus.pth
       - name: Run simple static checks
