@@ -247,21 +247,8 @@ const Login: React.FC<LoginProps> = ({ setAuthView, onLoginSuccess }) => {
 
   return (
     <div className="relative w-full h-full flex flex-col items-center justify-center bg-black overflow-hidden min-h-screen pb-32">
-      {/* Video Background */}
-      <div className="absolute inset-0 z-0 overflow-hidden">
-        <video
-          ref={videoRef}
-          autoPlay
-          loop
-          muted
-          playsInline
-          preload="metadata"
-          className="w-full h-full object-cover"
-          src="/uploads/bg-medium-flow.mp4"
-          poster="/images/bg-FbW.jpg"
-        />
-        <div className="absolute inset-0 bg-black/70"></div>
-      </div>
+      {/* Video Background (use the VideoBackground component so overlay renders) */}
+      <VideoBackground />
       
       {/* Auth Card - Strictly NO shadows as requested */}
       <div className="w-full max-w-[440px] mx-auto py-12 px-16 relative z-10 bg-[#161d2f]/90 backdrop-blur-[80px] border border-white/10 rounded-[4rem] shadow-none">
