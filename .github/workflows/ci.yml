@@ -77,7 +77,7 @@ jobs:
       - name: Check model URL
         run: python scripts/check_weights.py --model https://github.com/xinntao/Real-ESRGAN/releases/download/v0.3.0/RealESRGAN_x4plus.pth
       - name: Run simple static checks
-        run: python -m pyright --verifytypes
+        run: python -m pyright --warnings
 
   build:
     name: Build
