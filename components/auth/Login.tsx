@@ -123,42 +123,7 @@ const VideoBackground: React.FC = () => {
   const tintOpacity = 0.75;
   const scale = 1.04;
 
-  // Animated flow overlay component using SVG filters
-  const FlowOverlayAnimated: React.FC = () => {
-    const prefersReduced = typeof window !== 'undefined' && window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
-
-    return (
-      <div aria-hidden className="absolute inset-0 pointer-events-none z-10" style={{ mixBlendMode: 'screen' }}>
-        <svg className="w-full h-full" preserveAspectRatio="none" viewBox="0 0 1920 1080" xmlns="http://www.w3.org/2000/svg" role="img" aria-hidden>
-          <defs>
-            <filter id="flowFilter2">
-              <feTurbulence type="fractalNoise" baseFrequency="0.008 0.02" numOctaves="2" seed="7" result="turb" />
-              {!prefersReduced && (
-                <feTurbulence type="fractalNoise" baseFrequency="0.008 0.02" numOctaves="2" seed="11">
-                  <animate attributeName="baseFrequency" dur="22s" values="0.008 0.02;0.02 0.008;0.008 0.02" repeatCount="indefinite" />
-                </feTurbulence>
-              )}
-              <feDisplacementMap in="SourceGraphic" in2="turb" scale="40" xChannelSelector="R" yChannelSelector="G" />
-            </filter>
-          </defs>
-
-          <image
-            href="/images/flow-overlay.jpg"
-            x="0"
-            y="0"
-            width="100%"
-            height="100%"
-            preserveAspectRatio="xMidYMid slice"
-            filter="url(#flowFilter2)"
-            opacity="0.9"
-          />
-
-          {/* dark tint rect on top of the overlay to preserve contrast */}
-          <rect x="0" y="0" width="100%" height="100%" fill="black" opacity="0.75" />
-        </svg>
-      </div>
-    );
-  };
+  // Overlay removed per request — show only uploaded/default video (tint remains)
 
   return (
     <div ref={wrapperRef as any} className="absolute inset-0 z-0 overflow-hidden" style={{ willChange: 'transform', ['--tx' as any]: '0px', ['--ty' as any]: '0px' }}>
@@ -183,8 +148,7 @@ const VideoBackground: React.FC = () => {
         </video>
       </div>
 
-      {/* Animated flow overlay */}
-      <FlowOverlayAnimated />
+      {/* Overlay removed — only video + tint will render */}
 
       {/* dark tint to keep foreground legible; small backdrop blur for depth */}
       <div className="absolute inset-0" style={{ backgroundColor: `rgba(0,0,0,${tintOpacity})`, backdropFilter: 'blur(2px)' }} aria-hidden />
