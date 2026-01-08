@@ -1,0 +1,377 @@
+/* True half-circle background, layered behind nav */
+.mobile-menu-halfcircle-bg {
+  position: absolute;
+  left: 0; top: 0;
+  width: 50vw;
+  height: 100vh;
+  background: radial-gradient(100% 100% at 0% 50%, #4f46e5 98%, #111827 100%);
+  border-top-right-radius: 100vw;
+  border-bottom-right-radius: 100vw;
+  border-top-left-radius: 0;
+  border-bottom-left-radius: 0;
+  z-index: 0;
+  box-shadow: 0 12px 40px rgba(0,0,0,0.35);
+  overflow: hidden;
+}
+
+.mobile-menu-left-content {
+  position: relative;
+  width: 50vw;
+  min-width: 180px;
+  height: 100vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  z-index: 2;
+}
+
+/* Arc-contoured nav buttons */
+.arc-contour-list {
+  display: flex;
+  flex-direction: column;
+  gap: 0.7rem;
+}
+.arc-contour-btns {
+  display: flex;
+  flex-direction: column;
+}
+.arc-contour-btn {
+  margin-left: 0.5rem;
+  border-top-left-radius: 2rem;
+  border-bottom-left-radius: 2rem;
+  background: rgba(255,255,255,0.02);
+  box-shadow: 0 2px 8px rgba(0,0,0,0.08);
+  transition: transform 0.3s cubic-bezier(.4,.0,.2,1);
+}
+:root {
+  /* Scale and typography */
+  --ui-scale: 0.85;
+  --base-font-size: 14px;
+
+  /* Radii */
+  --radius-base: 0.5rem; /* small */
+  --radius-lg: 1rem; /* card radius */
+  --radius-4xl: 2rem; /* large rounded containers */
+
+  /* Spacing unit */
+  --space-unit: 0.5rem;
+} 
+
+html {
+  /* Base font size influenced by the scale token so rem-based sizes scale naturally */
+  font-size: calc(var(--base-font-size) * var(--ui-scale));
+}
+
+/* Text helpers */
+.ui-text-xxs { font-size: calc(0.65rem * var(--ui-scale)); font-weight: 800; }
+.ui-text-xs  { font-size: calc(0.75rem * var(--ui-scale)); }
+.ui-text-sm  { font-size: calc(0.95rem * var(--ui-scale)); }
+.ui-text-md  { font-size: calc(1rem * var(--ui-scale)); }
+
+/* Radii helpers */
+.ui-rounded-sm { border-radius: calc(var(--radius-base) * var(--ui-scale)) !important; }
+.ui-rounded-lg { border-radius: calc(var(--radius-lg) * var(--ui-scale)) !important; }
+.ui-rounded-4xl { border-radius: calc(var(--radius-4xl) * var(--ui-scale)) !important; }
+.ui-rounded-full { border-radius: 9999px !important; }
+
+/* Card / spacing helpers */
+.ui-card { padding: calc(1.25rem * var(--ui-scale)); border-radius: calc(var(--radius-lg) * var(--ui-scale)); }
+
+/* Button helpers */
+.ui-btn { display:inline-flex; align-items:center; justify-content:center; padding: calc(0.6rem * var(--ui-scale)) calc(1.1rem * var(--ui-scale)); border-radius: calc(var(--radius-lg) * var(--ui-scale)); font-weight:900; }
+.ui-btn-lg { padding-top: calc(0.9rem * var(--ui-scale)); padding-bottom: calc(0.9rem * var(--ui-scale)); }
+.ui-btn-outline { background: transparent; border: 1px solid rgba(255,255,255,0.12); color: #fff; }
+
+/* Avatar helpers */
+.ui-avatar-lg { width: calc(4.5rem * var(--ui-scale)); height: calc(4.5rem * var(--ui-scale)); }
+.ui-avatar-sm { width: calc(1.25rem * var(--ui-scale)); height: calc(1.25rem * var(--ui-scale)); }
+
+/* Utility: subtle card background shimmer to mimic previous gradient overlays */
+.ui-card .card-shimmer { position: absolute; inset: 0; pointer-events: none; background: linear-gradient(90deg, transparent, rgba(255,255,255,0.02), transparent); opacity: 0.6; }
+
+/* Keep a small set of overrides scoped to help transition from px-based Tailwind utilities */
+.text-ui-compact { letter-spacing: 0.05em; }
+
+/* Mobile Menu (Clipspace-styled) */
+.mobile-menu-left {
+  width: 46%;
+  min-width: 180px;
+  height: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: radial-gradient(900px 450px at 18% 50%, rgba(79,70,229,0.98), rgba(67,56,202,0.96) 45%, rgba(17,24,39,0.96) 100%);
+  color: white;
+  position: relative;
+  /* make the left block a half-circle (rounded right edge) */
+  border-top-right-radius: 9999px;
+  border-bottom-right-radius: 9999px;
+  overflow: visible;
+  padding: calc(1.25rem * var(--ui-scale));
+  box-shadow: 0 12px 40px rgba(0,0,0,0.35);
+}
+
+/* brand mark: prominent left-aligned wordmark across from profile */
+
+/* True vertical brand name for mobile nav */
+.mobile-menu-left .brand-vertical-true {
+  position: absolute;
+  left: 0;
+  top: 0;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  z-index: 2;
+}
+.mobile-menu-left .brand-vertical-true span {
+  color: #fff;
+  font-size: 2.1rem;
+  font-weight: 900;
+  letter-spacing: 0.08em;
+  margin: 0.1rem 0;
+  opacity: 0.9;
+  text-shadow: 0 2px 8px rgba(0,0,0,0.18);
+}
+
+/* Animated particles background for half-circle */
+.mobile-menu-left .particles-bg {
+  position: absolute;
+  left: 0; top: 0; width: 100%; height: 100%;
+  pointer-events: none;
+  z-index: 1;
+  overflow: hidden;
+}
+.mobile-menu-left .particles-bg::before,
+.mobile-menu-left .particles-bg::after {
+  content: '';
+  position: absolute;
+  border-radius: 50%;
+  background: radial-gradient(circle, rgba(255,255,255,0.12) 0%, rgba(79,70,229,0.18) 60%, transparent 100%);
+  animation: particleMove 4s infinite linear alternate;
+}
+.mobile-menu-left .particles-bg::before {
+  width: 38px; height: 38px; left: 18%; top: 22%; animation-delay: 0s;
+}
+.mobile-menu-left .particles-bg::after {
+  width: 22px; height: 22px; left: 60%; top: 70%; animation-delay: 1.2s;
+}
+@keyframes particleMove {
+  0% { transform: scale(1) translateY(0); opacity: 0.7; }
+  50% { transform: scale(1.2) translateY(12px); opacity: 0.4; }
+  100% { transform: scale(1) translateY(0); opacity: 0.7; }
+}
+
+/* True half-circle for mobile nav */
+.mobile-menu-left {
+  width: 38vw;
+  min-width: 120px;
+  height: 100vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  background: radial-gradient(100% 100% at 0% 50%, #4f46e5 98%, #111827 100%);
+  color: white;
+  position: relative;
+  border-top-right-radius: 100vw;
+  border-bottom-right-radius: 100vw;
+  border-top-left-radius: 0;
+  border-bottom-left-radius: 0;
+  overflow: visible;
+  padding: 0.5rem 0.5rem 0.5rem 0.5rem;
+  box-shadow: 0 12px 40px rgba(0,0,0,0.35);
+}
+.brand-vertical-true {
+  position: absolute;
+  left: 0.5rem;
+  top: 0;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  z-index: 2;
+}
+.brand-vertical-true span {
+  color: #fff;
+  font-size: 2.1rem;
+  font-weight: 900;
+  letter-spacing: 0.08em;
+  margin: 0.1rem 0;
+  opacity: 0.9;
+  text-shadow: 0 2px 8px rgba(0,0,0,0.18);
+}
+.clipspace-avatar-section {
+  margin-top: 8rem;
+  margin-bottom: 2rem;
+}
+.menu-name {
+  margin-top: 1.2rem;
+  font-weight: 900;
+  font-size: 1.1rem;
+  text-align: center;
+}
+.arc-contour-list {
+  gap: 1.2rem;
+}
+
+/* Nav menu buttons contouring the half circle */
+.arc-contour {
+  padding-left: calc(3.2rem * var(--ui-scale));
+}
+.arc-contour-list {
+  gap: calc(0.7rem * var(--ui-scale));
+}
+.arc-contour-btn {
+  margin-left: calc(0.5rem * var(--ui-scale));
+  border-top-left-radius: 2rem;
+  border-bottom-left-radius: 2rem;
+  background: rgba(255,255,255,0.02);
+  box-shadow: 0 2px 8px rgba(0,0,0,0.08);
+}
+
+/* Avatar wrapper with concentric rings using pseudo elements */
+.mobile-menu-left .avatar-wrapper {
+  position: relative;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  width: calc(5.2rem * var(--ui-scale));
+  height: calc(5.2rem * var(--ui-scale));
+  margin-top: calc(1.6rem * var(--ui-scale)); /* moved further down per request */
+}
+
+.mobile-menu-left .avatar-wrapper::before,
+.mobile-menu-left .avatar-wrapper::after {
+  content: '';
+  position: absolute;
+  border-radius: 50%;
+  pointer-events: none;
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%, -50%);
+}
+
+/* outer ring - thinner */
+.mobile-menu-left .avatar-wrapper::before {
+  width: calc(7.2rem * var(--ui-scale));
+  height: calc(7.2rem * var(--ui-scale));
+  border: 1.5px solid rgba(255,255,255,0.95); /* thinner white outer ring */
+  opacity: 0.95;
+}
+
+/* inner ring (dashed but white) - thinner */
+.mobile-menu-left .avatar-wrapper::after {
+  width: calc(6rem * var(--ui-scale));
+  height: calc(6rem * var(--ui-scale));
+  border: 1px dashed rgba(255,255,255,0.65); /* thinner dashed inner ring */
+}
+
+/* subtle pulse animation for avatar rings (randomizable via CSS variables set inline) */
+@keyframes pulseRing {
+  0% { transform: translate(-50%, -50%) scale(1); opacity: 0.95; }
+  50% { transform: translate(-50%, -50%) scale(1.06); opacity: 0.7; }
+  100% { transform: translate(-50%, -50%) scale(1); opacity: 0.95; }
+}
+
+.mobile-menu-left .avatar-wrapper.pulse::before {
+  animation: pulseRing var(--ring-dur, 2.8s) cubic-bezier(.4,.0,.2,1) infinite;
+  animation-delay: var(--ring-delay, 0s);
+}
+
+.mobile-menu-left .avatar-wrapper.pulse::after {
+  animation: pulseRing var(--ring-dur-2, 2.2s) cubic-bezier(.4,.0,.2,1) infinite;
+  animation-delay: var(--ring-delay-2, 0.15s);
+}
+
+.mobile-menu-left .menu-avatar {
+  width: calc(4.2rem * var(--ui-scale));
+  height: calc(4.2rem * var(--ui-scale));
+  border-radius: 9999px;
+  border: 2px solid rgba(255,255,255,0.95);
+  box-shadow: 0 12px 40px rgba(0,0,0,0.6);
+  position: relative;
+  z-index: 2;
+}
+
+.mobile-menu-left .menu-name {
+  margin-top: calc(1.8rem * var(--ui-scale)); /* moved down */
+  font-weight: 900;
+  font-size: calc(1rem * var(--ui-scale));
+} 
+
+/* subtle decorative radial accents around the left arc */
+.mobile-menu-left .arc-accent {
+  position:absolute;
+  left: -20%;
+  top: 20%;
+  width: 220%;
+  height: 60%;
+  background: radial-gradient(closest-side, rgba(255,255,255,0.02), transparent 40%);
+  transform: rotate(-12deg);
+  pointer-events:none;
+}
+
+
+.mobile-menu-right {
+  flex: 1;
+  padding: calc(1.25rem * var(--ui-scale));
+  padding-left: calc(2.6rem * var(--ui-scale)); /* ensure content contours the half-circle */
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  gap: calc(1rem * var(--ui-scale));
+}
+
+.mobile-menu-item-large {
+  display:flex;
+  align-items:center;
+  gap:calc(1rem * var(--ui-scale));
+  padding: calc(0.6rem * var(--ui-scale)) calc(0.6rem * var(--ui-scale));
+  font-size: calc(1.2rem * var(--ui-scale));
+  font-weight: 800;
+  color: rgba(255,255,255,0.95);
+  background: transparent;
+  border-radius: calc(0.75rem * var(--ui-scale));
+  transition: background-color 160ms ease, transform 160ms ease;
+}
+.mobile-menu-item-large:hover { background: rgba(255,255,255,0.02); transform: translateX(6px); }
+
+.mobile-menu-badge { position:relative; display:inline-flex; align-items:center; justify-content:center; }
+.mobile-menu-badge .badge-count { position:absolute; top:-6px; right:-6px; background:#ef4444; color:white; font-weight:900; font-size:0.65rem; width:18px; height:18px; border-radius:9999px; display:inline-flex; align-items:center; justify-content:center; }
+
+.mobile-menu-footer { margin-top: auto; padding-top: calc(0.5rem * var(--ui-scale)); display:flex; flex-direction:column; gap:0.5rem; }
+
+/* Small responsive tweak: slightly reduce overall spacing on small screens */
+@media (max-width: 640px) {
+  :root { --ui-scale: 0.85; }
+  .ui-card { padding: calc(1rem * var(--ui-scale)); }
+  .mobile-menu-left .brand-mark { font-size: 36px; left: 8px; }
+}
+
+/* Full screen nav styles */
+.fullnav-grid { display:block; }
+.fullnav-grid .tile { height: 100%; border-radius: 1rem; overflow: hidden; display:flex; align-items:center; justify-content:center; color: white; padding: 1.5rem; }
+.fullnav-grid .tile h3 { font-weight: 900; font-size: 1.25rem; }
+
+/* Theme chooser (full-screen) */
+.theme-chooser { display:flex; align-items:stretch; gap:0; }
+.theme-choice { display:flex; flex-direction:column; align-items:flex-start; justify-content:center; padding: 0.8rem 1rem; min-width: 160px; }
+.theme-choice .font-black { font-weight: 900; color: white; }
+.vertical-sep { width: 1px; background: rgba(255,255,255,0.06); }
+
+/* Toggle switch for full-screen nav theme (legacy fallback) */
+.switch { width: 56px; height: 28px; background: rgba(255,255,255,0.06); border-radius: 9999px; display:inline-flex; align-items:center; padding: 4px; cursor:pointer; }
+.switch .knob { width: 20px; height: 20px; background: #fff; border-radius: 9999px; transition: transform 180ms cubic-bezier(.2,.9,.3,1), background 180ms; transform: translateX(0); }
+.switch.on { background: linear-gradient(90deg, rgba(79,70,229,1), rgba(99,102,241,1)); }
+.switch.on .knob { transform: translateX(28px); background: #fff; }
+
+.fullnav-image-grid .tile { background-size: cover; background-position: center; height: 100%; border-radius: 1rem; position: relative; }
+.fullnav-image-grid .tile::after { content: ''; position:absolute; inset:0; background: linear-gradient(180deg, rgba(0,0,0,0.18), rgba(0,0,0,0.6)); }
+.fullnav-image-grid .center-badge { position:absolute; left:50%; top:50%; transform:translate(-50%,-50%); background:rgba(0,0,0,0.6); color:white; padding:0.6rem 0.9rem; border-radius:9999px; font-weight:900; }
+.fullnav-image-grid .tile { background-size: cover; background-position: center; height: 100%; border-radius: 1rem; position: relative; }
+.fullnav-image-grid .tile::after { content: ''; position:absolute; inset:0; background: linear-gradient(180deg, rgba(0,0,0,0.18), rgba(0,0,0,0.6)); }
+.fullnav-image-grid .center-badge { position:absolute; left:50%; top:50%; transform:translate(-50%,-50%); background:rgba(0,0,0,0.6); color:white; padding:0.6rem 0.9rem; border-radius:9999px; font-weight:900; }

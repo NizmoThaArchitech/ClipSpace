@@ -72,22 +72,21 @@ const navSections: { title: string; items: NavItem[] }[] = [
 
 const MobileMenu: React.FC<MobileMenuProps> = ({ isOpen, setCurrentView, closeMenu, theme: _theme }) => {
   const user = MOCK_USERS.jane_creator;
+  const ringVars = React.useMemo(() => {
+    return {
+      '--ring-dur': `${(2 + Math.random() * 1.4).toFixed(2)}s`,
+      '--ring-delay': `${(Math.random() * 0.6).toFixed(2)}s`,
+      '--ring-dur-2': `${(1.6 + Math.random() * 1.4).toFixed(2)}s`,
+      '--ring-delay-2': `${(Math.random() * 0.8).toFixed(2)}s`,
+    } as React.CSSProperties;
+  }, []);
 
   const handleNavigation = (view: View) => {
     setCurrentView(view);
     closeMenu();
   };
   
-  const NavButton: React.FC<{ item: NavItem, index: number }> = ({ item, index }) => (
-     <button
-        onClick={() => handleNavigation(item.view)}
-        className="mobile-menu-item flex items-center w-full space-x-4 px-4 py-3 text-lg font-medium text-gray-200 rounded-lg active:bg-indigo-500/30 active:scale-95 transition-transform"
-        style={{ animationDelay: `${50 + index * 30}ms` }}
-    >
-        {item.icon}
-        <span>{item.text}</span>
-    </button>
-  )
+
 
   return (
     <div
@@ -97,45 +96,59 @@ const MobileMenu: React.FC<MobileMenuProps> = ({ isOpen, setCurrentView, closeMe
       onClick={closeMenu}
     >
       <div
-        className={`absolute inset-y-0 left-0 w-4/5 max-w-sm h-full bg-gray-900 shadow-2xl transition-transform duration-500 ease-in-out flex flex-col ${
+        className={`absolute inset-y-0 left-0 w-4/5 max-w-sm h-full bg-transparent shadow-2xl transition-transform duration-500 ease-in-out ${
           isOpen ? 'translate-x-0' : '-translate-x-full'
         }`}
         onClick={(e) => e.stopPropagation()}
       >
-        <div className="p-4 border-b border-gray-700/50">
-            <div className="flex items-center gap-3">
-                <img src={user.avatarUrl} alt={user.name} className="w-12 h-12 rounded-full border-2 border-indigo-500" />
-                <div>
-                    <h3 className="font-bold text-white">{user.name}</h3>
-                    <p className="text-sm text-gray-400">{user.handle}</p>
+        <div className="flex h-full">
+          {/* Left: Curved brand panel */}
+          <div className="mobile-menu-left">
+              <div className="brand-vertical-true">
+                <span>C</span><span>L</span><span>I</span><span>P</span><span>S</span><span>P</span><span>A</span><span>C</span><span>E</span>
+              </div>
+                <div className="flex flex-col items-center z-10 clipspace-avatar-section">
+                  {/* Reference image removed. Layout matches reference UI. */}
+                  <div className="avatar-wrapper pulse" style={ringVars}>
+                    <img src={user.avatarUrl} alt={user.name} className="menu-avatar" />
+                  </div>
+                  <div className="menu-name">{user.name}</div>
                 </div>
-            </div>
-        </div>
-        
-        <nav className="flex-1 p-4 space-y-4 overflow-y-auto">
-            {navSections.map((section, sectionIndex) => (
-                <div key={section.title}>
-                    <h3 className="px-4 mt-2 mb-2 text-xs font-semibold uppercase tracking-wider text-gray-500">{section.title}</h3>
-                    <div className="space-y-1">
-                        {section.items.map((item, itemIndex) => (
-                             <NavButton key={item.view} item={item} index={sectionIndex * 5 + itemIndex} />
-                        ))}
-                    </div>
+          </div>
+
+          {/* Right: Vertical menu */}
+          <div className="mobile-menu-right arc-contour">
+              {navSections.flatMap(section => [
+                <div key={`s-${section.title}`}>
+                  <h3 className="px-4 mt-2 mb-2 text-xs font-semibold uppercase tracking-wider text-gray-500">{section.title}</h3>
+                  <div className="flex flex-col arc-contour-list">
+                    {section.items.map(item => (
+                      <button key={item.view} onClick={() => handleNavigation(item.view)} className="mobile-menu-item-large arc-contour-btn" style={{animationDelay: '0ms'}}>
+                        <div style={{width:32,display:'flex',alignItems:'center',justifyContent:'center'}}>{item.icon}</div>
+                        <span>{item.text}</span>
+                      </button>
+                    ))}
+                  </div>
                 </div>
-            ))}
-        </nav>
-        
-        <div className="p-4 border-t border-gray-700/50 space-y-1">
-             <NavButton item={{ view: 'profile', text: 'My Profile', icon: <User className="w-6 h-6" /> }} index={99} />
-             <NavButton item={{ view: 'settings', text: 'Settings', icon: <SettingsIcon className="w-6 h-6" /> }} index={100} />
-             <button
-                onClick={() => console.log("Logout clicked")}
-                className="mobile-menu-item flex items-center w-full space-x-4 px-4 py-3 text-lg font-medium text-gray-200 rounded-lg active:bg-red-500/30 active:scale-95 transition-transform"
-                style={{ animationDelay: `150ms` }}
-            >
-                <LogoutIcon className="w-6 h-6" />
-                <span>Logout</span>
-            </button>
+              ])}
+
+              <div className="mobile-menu-footer">
+                <button onClick={() => handleNavigation('profile')} className="mobile-menu-item-large">
+                  <User className="w-6 h-6" />
+                  <span>Account</span>
+                </button>
+                <div className="flex items-center justify-between px-1">
+                  <button onClick={() => handleNavigation('settings')} className="mobile-menu-item-large">
+                    <SettingsIcon className="w-6 h-6" />
+                    <span>Settings</span>
+                  </button>
+                  <button onClick={() => console.log('Logout clicked')} className="mobile-menu-item-large">
+                    <LogoutIcon className="w-6 h-6" />
+                    <span>Logout</span>
+                  </button>
+                </div>
+              </div>
+          </div>
         </div>
       </div>
     </div>

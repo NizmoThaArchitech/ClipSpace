@@ -47,6 +47,8 @@ module.exports = {
     'jsx-a11y/alt-text': 'error',
     'jsx-a11y/anchor-has-content': 'warn',
     'jsx-a11y/img-redundant-alt': 'warn',
+    'jsx-a11y/label-has-associated-control': 'warn',
+    'jsx-a11y/click-events-have-key-events': 'warn',
     'jsx-a11y/label-has-associated-control': 'off',
     'jsx-a11y/click-events-have-key-events': 'off',
     'jsx-a11y/no-static-element-interactions': 'off',

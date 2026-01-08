@@ -116,7 +116,7 @@ const App: React.FC = () => {
             <button onClick={() => setIsLeftSidebarVisible(true)} className="hidden md:block fixed top-1/2 -translate-y-1/2 left-0 z-30 bg-gray-800/80 hover:bg-indigo-600 p-2 rounded-r-lg" title="Show Sidebar"><ChevronDoubleRightIcon className="w-5 h-5 text-white"/></button>
           )}
           
-          <main className={`flex-1 min-w-0 overflow-y-auto ${theme === 'dark' ? 'bg-gray-900' : 'bg-white'}`}>
+          <main className={`flex-1 min-w-0 overflow-y-auto pb-24 ${theme === 'dark' ? 'bg-gray-900' : 'bg-white'}`}>
             {renderContent()}
           </main>
 

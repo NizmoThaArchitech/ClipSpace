@@ -51,6 +51,8 @@ jobs:
   python-check:
     name: Python checks
     runs-on: ubuntu-latest
+    env:
+      PYRIGHT_PYTHON_FORCE_VERSION: latest
     steps:
       - uses: actions/checkout@v4
       - name: Set up Python

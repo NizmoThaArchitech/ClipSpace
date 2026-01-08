@@ -11,7 +11,7 @@ interface VideoCardProps {
 
 const VideoCard: React.FC<VideoCardProps> = ({ clip, setCurrentView }) => {
   return (
-    <div className="group bg-gray-800 rounded-lg overflow-hidden shadow-lg flex flex-col transition-shadow duration-300 hover:shadow-2xl hover:shadow-indigo-500/30">
+    <div className="group bg-gray-800 ui-card overflow-hidden shadow-lg flex flex-col transition-shadow duration-300 hover:shadow-2xl hover:shadow-indigo-500/30">
       {/* Media container */}
       <div className="relative aspect-video">
         <img
@@ -20,22 +20,22 @@ const VideoCard: React.FC<VideoCardProps> = ({ clip, setCurrentView }) => {
           className="object-cover w-full h-full"
         />
         <div className="absolute inset-0 bg-black bg-opacity-20 group-hover:bg-opacity-40 transition-all duration-300 flex items-center justify-center">
-           <svg className="w-16 h-16 text-white opacity-0 group-hover:opacity-80 transform group-hover:scale-110 transition-all duration-300" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path fillRule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zM9.555 7.168A1 1 0 008 8v4a1 1 0 001.555.832l3-2a1 1 0 000-1.664l-3-2z" clipRule="evenodd"></path></svg>
+           <svg className="w-14 h-14 text-white opacity-0 group-hover:opacity-80 transform group-hover:scale-110 transition-all duration-300" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path fillRule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zM9.555 7.168A1 1 0 008 8v4a1 1 0 001.555.832l3-2a1 1 0 000-1.664l-3-2z" clipRule="evenodd"></path></svg>
         </div>
         <div className="absolute top-2 left-2">
             <EndorsementLevelIcon endorsements={clip.creator.endorsements || 0} size={32} />
         </div>
         <div className="absolute top-2 right-2 flex flex-col items-end gap-2">
-            <div className="bg-gray-900 bg-opacity-70 text-white text-xs font-bold px-2 py-1 rounded">
+            <div className="bg-gray-900 bg-opacity-70 text-white ui-text-xxs font-bold px-2 py-1 ui-rounded-sm">
               {clip.resolution}
             </div>
             {clip.licenseTiers && clip.licenseTiers.length > 1 && (
-                <div className="bg-cyan-600 bg-opacity-90 text-white text-xs font-bold px-2 py-1 rounded">
+                <div className="bg-cyan-600 bg-opacity-90 text-white ui-text-xxs font-bold px-2 py-1 ui-rounded-sm">
                     LICENSES
                 </div>
             )}
         </div>
-        <div className="absolute bottom-2 left-2 bg-gray-900 bg-opacity-70 text-white text-xs px-2 py-1 rounded">
+        <div className="absolute bottom-2 left-2 bg-gray-900 bg-opacity-70 text-white ui-text-xxs px-2 py-1 ui-rounded-sm">
           {Math.floor(clip.duration / 60)}:{String(clip.duration % 60).padStart(2, '0')}
         </div>
       </div>
@@ -50,7 +50,7 @@ const VideoCard: React.FC<VideoCardProps> = ({ clip, setCurrentView }) => {
           <img
             src={clip.creator.avatarUrl}
             alt={clip.creator.name}
-            className="w-6 h-6 rounded-full mr-2"
+            className="ui-avatar-sm ui-rounded-full mr-2"
           />
           <div>
             <span className="text-sm font-medium text-gray-300">{clip.creator.name}</span>

@@ -150,37 +150,37 @@ const Login: React.FC<LoginProps> = ({ setAuthView, onLoginSuccess }) => {
       <VideoBackground />
       
       {/* Auth Card - Strictly NO shadows as requested */}
-      <div className="w-full max-w-[440px] mx-auto py-12 px-16 relative z-10 bg-[#161d2f]/90 backdrop-blur-[80px] border border-white/10 rounded-[4rem] shadow-none">
+      <div className="w-full max-w-[440px] mx-auto relative z-10 bg-[#161d2f]/90 backdrop-blur-[80px] border border-white/10 ui-card ui-rounded-4xl shadow-none">
         <div className="text-center mb-10">
-          <div className="bg-white/5 w-24 h-24 rounded-full flex items-center justify-center mx-auto mb-6 border border-white/10 shadow-none">
-             <ClipspaceLogo className="h-14 w-14" theme="dark" />
+          <div className="bg-white/5 ui-avatar-lg ui-rounded-full flex items-center justify-center mx-auto mb-6 border border-white/10 shadow-none">
+             <ClipspaceLogo className="h-12 w-12" theme="dark" />
           </div>
-          <h1 className="text-5xl font-black tracking-tighter uppercase italic text-white leading-none">
+          <h1 className="text-4xl font-black tracking-tighter uppercase italic text-white leading-none">
             Clip<span className="text-white/60">Space</span>
           </h1>
-          <p className="text-gray-400 mt-4 font-black uppercase text-[10px] tracking-[0.7em] italic">Multi-Node Production Mesh</p>
+          <p className="text-gray-400 mt-4 font-black uppercase ui-text-xxs tracking-[0.7em] italic">Multi-Node Production Mesh</p>
         </div>
 
         <div className="space-y-8">
           <div className="text-center">
-            <h2 className="text-white text-lg font-black uppercase tracking-widest mb-2 italic">Signal Bridge Active</h2>
-            <p className="text-gray-400 text-[10px] font-bold uppercase tracking-widest leading-relaxed opacity-70">
+            <h2 className="text-white ui-text-md font-black uppercase tracking-widest mb-2 italic">Signal Bridge Active</h2>
+            <p className="text-gray-400 ui-text-xxs font-bold uppercase tracking-widest leading-relaxed opacity-70">
                 Network authentication verified. Press the terminal initialization button to enter the global production hub.
             </p>
           </div>
           
           <button 
             onClick={onLoginSuccess}
-            className="w-full flex justify-center py-8 px-4 border border-white/20 rounded-[2.5rem] text-[12px] font-black uppercase tracking-[0.5em] text-white bg-white/5 hover:bg-white/10 transition-all active:scale-95 group overflow-hidden relative shadow-none"
+            className="w-full flex justify-center ui-btn ui-btn-lg ui-btn-outline group overflow-hidden relative"
           >
-            <span className="relative z-10">Initialize Terminal</span>
+            <span className="relative z-10 tracking-[0.5em] font-black ui-text-sm uppercase">Initialize Terminal</span>
             <div className="absolute inset-0 bg-gradient-to-r from-transparent via-white/5 to-transparent -translate-x-full group-hover:translate-x-full transition-transform duration-1000"></div>
           </button>
         </div>
 
         <div className="mt-14 flex items-center justify-center gap-4">
             <div className="h-[1px] w-12 bg-white/10"></div>
-            <p className="text-center text-[9px] font-black text-gray-500 uppercase tracking-[0.4em]">Node Protocol V4.2.1-GOLD</p>
+            <p className="text-center ui-text-xxs font-black text-gray-500 uppercase tracking-[0.4em]">Node Protocol V4.2.1-GOLD</p>
             <div className="h-[1px] w-12 bg-white/10"></div>
         </div>
       </div>
