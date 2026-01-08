@@ -158,11 +158,13 @@ const VideoBackground: React.FC = () => {
         aria-hidden
         className="absolute inset-0 pointer-events-none"
         style={{
-          backgroundImage: `url('/images/flow-overlay.jpg')`,
+          backgroundImage: `linear-gradient(rgba(0,0,0,0.55), rgba(0,0,0,0.55)), url('/images/flow-overlay.jpg')`,
           backgroundSize: 'cover',
           backgroundPosition: 'center',
-          opacity: 0.9,
+          backgroundRepeat: 'no-repeat',
+          opacity: 0.95,
           mixBlendMode: 'screen',
+          backgroundBlendMode: 'multiply',
         }}
       />
 
