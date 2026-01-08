@@ -9,10 +9,7 @@ import { TrendingUpIcon } from './icons/TrendingUpIcon';
 import { DollarIcon } from './icons/DollarIcon';
 import { EyeIcon } from './icons/EyeIcon';
 
-const Analytics: React.FC<{ theme: Theme }> = ({ theme }) => {
-    const isDark = theme === 'dark';
-    const accentColor = isDark ? 'indigo' : 'red';
-    
+const Analytics: React.FC<{ theme: Theme }> = ({ theme: _theme }) => {
     const ChartPlaceholder: React.FC<{ data: number[], color: string }> = ({ data, color }) => {
         const maxVal = Math.max(...data, 1);
         const points = data.map((d, i) => `${(i / (data.length - 1)) * 100},${100 - (d / maxVal) * 90}`).join(' ');

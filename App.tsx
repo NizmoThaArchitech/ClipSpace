@@ -1,5 +1,5 @@
 
-import React, { useState, useEffect } from 'react';
+import React, { useState } from 'react';
 import Header from './components/Header';
 import Upload from './components/Upload';
 import LeftSidebar from './components/LeftSidebar';
@@ -24,9 +24,7 @@ import Syndication from './components/Syndication';
 import CSpaceVideoSuite from './components/ClipGenStudio';
 import Footer from './components/Footer';
 import PricingPage from './components/PricingPage';
-import LegalPage from './components/LegalPage';
 import MusicConnect from './components/MusicConnect';
-import { LEGAL_CONTENT } from './constants';
 import { ChevronDoubleRightIcon } from './components/icons/ChevronDoubleRightIcon';
 import { ChevronDoubleLeftIcon } from './components/icons/ChevronDoubleLeftIcon';
 import { CloseIcon } from './components/icons/CloseIcon';

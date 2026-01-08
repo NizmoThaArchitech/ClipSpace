@@ -8,8 +8,6 @@ import { CloseIcon } from './icons/CloseIcon';
 import type { Theme } from '../App';
 import { MOCK_USERS } from '../constants';
 import { UploadIcon } from './icons/UploadIcon';
-import { PlusIcon } from './icons/PlusIcon';
-import { TrashIcon } from './icons/TrashIcon';
 import { TwitterIcon } from './icons/TwitterIcon';
 import { YouTubeIcon } from './icons/YouTubeIcon';
 import { WebsiteIcon } from './icons/WebsiteIcon';
@@ -23,7 +21,7 @@ interface SettingsProps {
 
 type SettingsTab = 'Profile' | 'Account' | 'Notifications' | 'Billing' | 'Host' | 'Auth Connect';
 
-const Settings: React.FC<SettingsProps> = ({ theme }) => {
+const Settings: React.FC<SettingsProps> = ({ theme: _theme }) => {
   const [activeTab, setActiveTab] = useState<SettingsTab>('Profile');
   const [profileData, setProfileData] = useState<UserType>(MOCK_USERS.jane_creator);
 
@@ -112,8 +110,8 @@ const Settings: React.FC<SettingsProps> = ({ theme }) => {
     )
   }
 
-  const handleFieldChange = (field: keyof UserType, value: any) => {
-    setProfileData(prev => ({ ...prev, [field]: value }));
+  const handleFieldChange = (field: keyof UserType, value: unknown) => {
+    setProfileData(prev => ({ ...(prev as unknown as Record<string, unknown>), [field]: value } as unknown as UserType));
   };
 
   const tabs: { name: SettingsTab, icon: React.ReactNode }[] = [

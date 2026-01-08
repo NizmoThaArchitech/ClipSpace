@@ -1,10 +1,7 @@
 
 import React, { useEffect, useRef, useState } from 'react';
 import { CameraIcon } from './icons/CameraIcon'; 
-import { MicIcon } from './icons/MicIcon';
-import { PhoneIcon } from './icons/PhoneIcon';
-import { MicOffIcon } from './icons/MicOffIcon';
-import { CameraOffIcon } from './icons/CameraOffIcon';
+
 import type { Theme, ShowReminder } from '../App';
 import type { User } from '../types';
 import { MOCK_USERS, MOCK_VIDEO_CLIPS } from '../constants';
@@ -12,16 +9,15 @@ import { LayoutSpeakerIcon } from './icons/LayoutSpeakerIcon';
 import { VolumeIcon } from './icons/VolumeIcon';
 import { DocumentTextIcon } from './icons/DocumentTextIcon';
 import { TeleprompterIcon } from './icons/TeleprompterIcon';
+import { MicOffIcon } from './icons/MicOffIcon';
 import { BellAlertIcon } from './icons/UserIcon';
-import { ArrowPathIcon } from './icons/ArrowPathIcon';
+
 import { MediaPlayerIcon } from './icons/MediaPlayerIcon';
 import { SparklesIcon } from './icons/SparklesIcon';
 import { UserSwitchIcon } from './icons/UserSwitchIcon';
 import { WaveformIcon } from './icons/WaveformIcon';
 import { PlusIcon } from './icons/PlusIcon';
-import { GripVerticalIcon } from './icons/GripVerticalIcon';
 import { GlobeAltIcon } from './icons/GlobeAltIcon';
-import { ShareIcon } from './icons/ShareIcon';
 import { SearchIcon } from './icons/SearchIcon';
 import { MusicalNoteIcon } from './icons/MusicalNoteIcon';
 import { EyeIcon } from './icons/EyeIcon';
@@ -157,7 +153,7 @@ const AITeleprompter: React.FC = () => {
     );
 };
 
-const LiveCoCreate: React.FC<{ theme: Theme, setReminder: (reminder: ShowReminder) => void }> = ({ theme, setReminder }) => {
+const LiveCoCreate: React.FC<{ theme: Theme, setReminder: (reminder: ShowReminder) => void }> = ({ theme: _theme, setReminder: _setReminder }) => {
   const [isSessionActive, setIsSessionActive] = useState(false);
   const [activeCamera, setActiveCamera] = useState(0);
   const [previewCamera, setPreviewCamera] = useState(1);
@@ -317,7 +313,7 @@ const LiveCoCreate: React.FC<{ theme: Theme, setReminder: (reminder: ShowReminde
                       {['switcher', 'soundboard', 'meeting'].map((tool) => (
                         <button 
                             key={tool}
-                            onClick={() => setActiveStudioTool(tool as any)}
+                            onClick={() => setActiveStudioTool(tool as 'switcher' | 'soundboard' | 'meeting')}
                             className={`w-2.5 h-2.5 rounded-full transition-all duration-500 ${activeStudioTool === tool ? 'bg-indigo-500 ring-4 ring-indigo-500/20 scale-125' : 'bg-gray-800 hover:bg-gray-700'}`}
                         />
                       ))}

@@ -1,10 +1,10 @@
 
-import React, { useState, useEffect, useRef } from 'react';
+import React, { useState, useEffect } from 'react';
 import type { Theme } from '../App.tsx';
+import type { VideoClip } from '../types';
 import { MOCK_VIDEO_CLIPS, MOCK_USERS, STYLE_PRESETS } from '../constants.ts';
 import { SparklesIcon } from './icons/SparklesIcon.tsx';
 import { CubeTransparentIcon } from './icons/CubeTransparentIcon.tsx';
-import { FilmIcon } from './icons/FilmIcon.tsx';
 import { PaintBrushIcon } from './icons/PaintBrushIcon.tsx';
 import { MusicalNoteIcon } from './icons/MusicalNoteIcon.tsx';
 import { GripVerticalIcon } from './icons/GripVerticalIcon.tsx';
@@ -25,15 +25,15 @@ const loadingStates = [
     { state: 'interpolating_motion', message: 'Applying motion vectors...' },
 ];
 
-const CSpaceVideoSuite: React.FC<{ theme: Theme }> = ({ theme }) => {
-    const [uploadedClip, setUploadedClip] = useState<any | null>(null);
+const CSpaceVideoSuite: React.FC<{ theme: Theme }> = ({ theme: _theme }) => {
+    const [uploadedClip, setUploadedClip] = useState<VideoClip | null>(null);
     const [prompt, setPrompt] = useState('');
     const [soundDesignPrompt, setSoundDesignPrompt] = useState('');
     const [generationState, setGenerationState] = useState('idle');
-    const [generatedClip, setGeneratedClip] = useState<any | null>(null);
-    const [loadingMessage, setLoadingMessage] = useState('');
+    const [, setGeneratedClip] = useState<VideoClip | null>(null);
+    const [, setLoadingMessage] = useState('');
     const [activeTab, setActiveTab] = useState<'edit' | 'style' | 'audio' | 'generate'>('edit');
-    const [timelineClips, setTimelineClips] = useState<any[]>([]);
+    const [timelineClips, setTimelineClips] = useState<VideoClip[]>([]);
     const [generatedWaveform, setGeneratedWaveform] = useState(false);
     const [showHeatmap, setShowHeatmap] = useState(false);
     const [isSidebarExpanded, setIsSidebarExpanded] = useState(true);
@@ -174,7 +174,7 @@ const CSpaceVideoSuite: React.FC<{ theme: Theme }> = ({ theme }) => {
                                              {['Cinematic', 'Vintage', 'Abstract'].map(style => (
                                                  <button 
                                                     key={style}
-                                                    onClick={() => setRecordingStyle(style as any)}
+                                                    onClick={() => setRecordingStyle(style as 'Cinematic' | 'Vintage' | 'Abstract')}
                                                     className={`px-8 py-4 rounded-2xl font-black border-4 transition-all ${recordingStyle === style ? 'bg-indigo-600 border-white text-white scale-110 shadow-2xl' : 'bg-black/60 border-indigo-500/40 text-indigo-400 hover:border-indigo-400'}`}
                                                  >
                                                      {style}

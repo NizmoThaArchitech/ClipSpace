@@ -1,10 +1,9 @@
 
 import React, { useState } from 'react';
 import type { View, Theme } from '../App';
-import { MOCK_USERS, MOCK_VIDEO_CLIPS, MOCK_NETWORK_ACTIVITIES, MOCK_COMMUNITY_NETWORKS } from '../constants';
+import { MOCK_USERS, MOCK_VIDEO_CLIPS, MOCK_COMMUNITY_NETWORKS } from '../constants';
 import EndorsementLevelIcon from './icons/EndorsementLevelIcon';
 import { CameraIcon } from './icons/CameraIcon';
-import { ShareIcon } from './icons/ShareIcon';
 import { TwitterIcon } from './icons/TwitterIcon';
 import { YouTubeIcon } from './icons/YouTubeIcon';
 import { WebsiteIcon } from './icons/WebsiteIcon';
@@ -12,7 +11,6 @@ import VideoCard from './VideoCard';
 import { DollarIcon } from './icons/DollarIcon';
 import { SparklesIcon } from './icons/SparklesIcon';
 import NetworkActivityFeed from './NetworkActivityFeed';
-import { LockClosedIcon } from './icons/LockClosedIcon';
 // FIX: Imported StarIcon to resolve reference errors.
 import { StarIcon } from './icons/StarIcon';
 

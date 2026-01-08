@@ -1,7 +1,6 @@
 
 import React from 'react';
 import type { AuthView } from '../../AuthApp';
-import { ClipspaceLogo } from '../icons/ClipspaceLogo';
 import { CheckIcon } from '../icons/CheckIcon';
 
 interface PricingProps {

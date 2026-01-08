@@ -10,58 +10,8 @@ interface LoginProps {
   onLoginSuccess: () => void;
 }
 
-// Visual Node Components - Pure White Thinner Outlines
-const LaptopIcon = ({ x, y }: { x: number; y: number }) => (
-  <g transform={`translate(${x - 12}, ${y - 12})`} className="opacity-30">
-    <rect x="3" y="6" width="18" height="11" rx="0.5" fill="none" stroke="white" strokeWidth="0.8" />
-    <path d="M1 18h22c0-0.5-0.5-1-1-1H2c-0.5 0-1 0.5-1 1z" fill="white" opacity="0.8" />
-    <rect x="10" y="8" width="4" height="3" fill="white" opacity="0.1" />
-  </g>
-);
-
-const ServerIcon = ({ x, y }: { x: number; y: number }) => (
-  <g transform={`translate(${x - 12}, ${y - 12})`} className="opacity-30">
-    <rect x="5" y="3" width="14" height="18" rx="0.5" fill="none" stroke="white" strokeWidth="0.8" />
-    <line x1="5" y1="9" x2="19" y2="9" stroke="white" strokeWidth="0.5" />
-    <line x1="5" y1="15" x2="19" y2="15" stroke="white" strokeWidth="0.5" />
-    <circle cx="8" cy="6" r="0.4" fill="white" />
-    <circle cx="8" cy="12" r="0.4" fill="white" />
-    <circle cx="8" cy="18" r="0.4" fill="white" />
-  </g>
-);
-
-const PCIcon = ({ x, y }: { x: number; y: number }) => (
-  <g transform={`translate(${x - 12}, ${y - 12})`} className="opacity-30">
-    <rect x="4" y="4" width="16" height="12" rx="0.5" fill="none" stroke="white" strokeWidth="0.8" />
-    <path d="M8 20h8M12 16v4" stroke="white" strokeWidth="0.8" />
-    <rect x="7" y="7" width="10" height="6" fill="white" opacity="0.1" />
-  </g>
-);
-
-const GlobeWireframe = ({ x, y, size = 40 }: { x: number; y: number; size?: number }) => (
-  <g transform={`translate(${x}, ${y})`} className="animate-globe-spin opacity-20">
-    <circle cx="0" cy="0" r={size} fill="none" stroke="white" strokeWidth="0.3" />
-    <ellipse cx="0" cy="0" rx={size} ry={size / 2.5} fill="none" stroke="white" strokeWidth="0.3" />
-    <ellipse cx="0" cy="0" rx={size / 2.5} ry={size} fill="none" stroke="white" strokeWidth="0.3" />
-    <line x1={-size} y1="0" x2={size} y2="0" stroke="white" strokeWidth="0.2" opacity="0.5" />
-    <line x1="0" y1={-size} x2="0" y2={size} stroke="white" strokeWidth="0.2" opacity="0.5" />
-  </g>
-);
-
-interface Node {
-  id: number;
-  x: number;
-  y: number;
-  type: 'laptop' | 'server' | 'pc' | 'globe';
-}
-
-interface Spark {
-  id: string;
-  startX: number;
-  startY: number;
-  endX: number;
-  endY: number;
-}
+// Decorative SVG icon components and internal Node/Spark types were removed to reduce lint noise
+// and keep this file focused on rendering the login UI. Restore when needed.
 
 const VideoBackground: React.FC = () => {
   // Look for an uploaded video URL in localStorage (key: 'authBgVideo')
@@ -125,11 +75,15 @@ const VideoBackground: React.FC = () => {
 
   // Overlay removed per request — show only uploaded/default video (tint remains)
 
+  const wrapperStyle: React.CSSProperties & Record<string, string> = { willChange: 'transform' } as React.CSSProperties & Record<string, string>;
+  wrapperStyle['--tx'] = '0px';
+  wrapperStyle['--ty'] = '0px';
+
   return (
-    <div ref={wrapperRef as any} className="absolute inset-0 z-0 overflow-hidden" style={{ willChange: 'transform', ['--tx' as any]: '0px', ['--ty' as any]: '0px' }}>
+    <div ref={wrapperRef} className="absolute inset-0 z-0 overflow-hidden" style={wrapperStyle}>
       <div className="absolute inset-0 transform-gpu" style={{ transform: 'translate3d(var(--tx, 0px), var(--ty, 0px), 0) scale(1.04)', transition: 'transform 800ms cubic-bezier(.2,.8,.2,1)' }}>
         <video
-          ref={videoRef as any}
+          ref={videoRef}
           aria-hidden
           className="w-full h-full object-cover pointer-events-none"
           playsInline

@@ -50,7 +50,7 @@ const ParticipantVideo: React.FC<{ participant: User, isCameraOff: boolean, isMi
     );
 };
 
-const Conference: React.FC<{ theme: Theme }> = ({ theme }) => {
+const Conference: React.FC<{ theme: Theme }> = ({ theme: _theme }) => {
   const [isMicMuted, setIsMicMuted] = useState(false);
   const [isCameraOff, setIsCameraOff] = useState(false);
   const [localStream, setLocalStream] = useState<MediaStream | null>(null);

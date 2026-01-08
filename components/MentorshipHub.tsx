@@ -2,10 +2,9 @@
 import React from 'react';
 import type { Theme } from '../App';
 import { MOCK_USERS, MOCK_MENTORSHIP_SLOTS } from '../constants';
-import { MentorshipIcon } from './icons/MentorshipIcon';
 import { CalendarIcon } from './icons/CalendarIcon';
 
-const MentorshipHub: React.FC<{ theme: Theme }> = ({ theme }) => {
+const MentorshipHub: React.FC<{ theme: Theme }> = ({ theme: _theme }) => {
     const mentors = Object.values(MOCK_USERS).filter(u => u.mentorshipRate);
 
   return (

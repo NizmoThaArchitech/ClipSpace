@@ -48,10 +48,28 @@ jobs:
       - name: Test
         run: npm test --if-present
 
+  python-check:
+    name: Python checks
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Set up Python
+        uses: actions/setup-python@v4
+        with:
+          python-version: '3.11'
+      - name: Create venv
+        run: python -m venv .venv_realesrgan311
+      - name: Install requirements
+        run: .venv_realesrgan311\Scripts\python -m pip install --upgrade pip && .venv_realesrgan311\Scripts\python -m pip install -r requirements.txt
+      - name: Check model URL
+        run: .venv_realesrgan311\Scripts\python scripts/check_weights.py --model https://github.com/xinntao/Real-ESRGAN/releases/download/v0.3.0/RealESRGAN_x4plus.pth
+      - name: Run simple static checks
+        run: .venv_realesrgan311\Scripts\python -m pyright --verifytypes
+
   build:
     name: Build
     runs-on: ubuntu-latest
-    needs: [typecheck, lint, test]
+    needs: [typecheck, lint, test, python-check]
     steps:
       - uses: actions/checkout@v4
       - uses: actions/setup-node@v4

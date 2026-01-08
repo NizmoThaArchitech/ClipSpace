@@ -20,7 +20,7 @@ import { GavelIcon } from './icons/GavelIcon';
 import { ShareIcon } from './icons/ShareIcon';
 import { LiveIcon } from './icons/LiveIcon';
 import { CubeTransparentIcon } from './icons/CubeTransparentIcon';
-import { HandshakeIcon } from './icons/HandshakeIcon';
+
 import { AffiliateIcon } from './icons/AffiliateIcon';
 
 interface MobileMenuProps {
@@ -70,7 +70,7 @@ const navSections: { title: string; items: NavItem[] }[] = [
     },
 ];
 
-const MobileMenu: React.FC<MobileMenuProps> = ({ isOpen, setCurrentView, closeMenu, theme }) => {
+const MobileMenu: React.FC<MobileMenuProps> = ({ isOpen, setCurrentView, closeMenu, theme: _theme }) => {
   const user = MOCK_USERS.jane_creator;
 
   const handleNavigation = (view: View) => {

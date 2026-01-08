@@ -4,8 +4,7 @@ import type { View, Theme } from '../App';
 import SearchBar from './SearchBar';
 import { ClipspaceLogo } from './icons/ClipspaceLogo';
 import { NotificationIcon } from './icons/NotificationIcon';
-import { MenuIcon } from './icons/MenuIcon';
-import { CloseIcon } from './icons/CloseIcon';
+
 import EndorsementLevelIcon from './icons/EndorsementLevelIcon';
 import ThemeToggle from './ThemeToggle';
 import MusicPlayerWidget from './MusicPlayerWidget';
@@ -57,7 +56,7 @@ interface HeaderProps {
 }
 
 const Header: React.FC<HeaderProps> = ({ isMenuOpen, setIsMenuOpen, setCurrentView, theme, setTheme }) => {
-  const [notificationStatus, setNotificationStatus] = useState<'new' | 'old' | 'todo' | 'none'>('new');
+  const [notificationStatus] = useState<'new' | 'old' | 'todo' | 'none'>('new');
 
   const statusColor = {
     new: 'bg-green-400',

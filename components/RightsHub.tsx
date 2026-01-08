@@ -2,11 +2,9 @@
 import React, { useState } from 'react';
 import type { Theme } from '../App';
 import { MOCK_VIDEO_CLIPS, MOCK_USERS } from '../constants';
-import { GavelIcon } from './icons/GavelIcon';
-import { LockClosedIcon } from './icons/LockClosedIcon';
 import { PlusIcon } from './icons/PlusIcon';
 
-const RightsHub: React.FC<{ theme: Theme }> = ({ theme }) => {
+const RightsHub: React.FC<{ theme: Theme }> = ({ theme: _theme }) => {
     const [activeTab, setActiveTab] = useState('ip');
     
     const renderContent = () => {

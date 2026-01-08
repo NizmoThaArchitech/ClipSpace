@@ -1,6 +1,6 @@
 
 import React, { useState } from 'react';
-import { MOCK_TRANSACTIONS, MOCK_SPLIT_CONTRACTS, MOCK_USERS } from '../constants';
+import { MOCK_TRANSACTIONS, MOCK_SPLIT_CONTRACTS } from '../constants';
 import { DownloadIcon } from './icons/DownloadIcon';
 import { ShoppingCartIcon } from './icons/ShoppingCartIcon';
 import { CreditCardIcon } from './icons/CreditCardIcon';
@@ -65,7 +65,7 @@ const SplitContractModal: React.FC<{ contract: SplitContract; onClose: () => voi
     );
 };
 
-const Wallet: React.FC<WalletProps> = ({ theme }) => {
+const Wallet: React.FC<WalletProps> = ({ theme: _theme }) => {
   const [activeView, setActiveView] = useState<'balance' | 'splits'>('balance');
   const [selectedContract, setSelectedContract] = useState<SplitContract | null>(null);
 

@@ -83,7 +83,7 @@ const RightSidebar: React.FC<RightSidebarProps> = ({ theme, setIsVisible }) => {
     { name: 'CozyMoments', avatar: 'https://i.pravatar.cc/150?u=cozymoments', online: true },
   ];
 
-  const handleMouseDown = (e: React.MouseEvent) => {
+  const handleMouseDown = (_e: React.MouseEvent) => {
     isResizing.current = true;
     document.body.style.cursor = 'ns-resize';
     document.body.style.userSelect = 'none';

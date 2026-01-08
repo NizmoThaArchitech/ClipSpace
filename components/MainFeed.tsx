@@ -18,7 +18,7 @@ interface MainFeedProps {
   setCurrentView: (view: View) => void;
 }
 
-const MainFeed: React.FC<MainFeedProps> = ({ setCurrentView, theme }) => {
+const MainFeed: React.FC<MainFeedProps> = ({ setCurrentView, theme: _theme }) => {
   const [sortOrder, setSortOrder] = useState('newest');
   const creators = Object.values(MOCK_USERS);
   const topCreator = [...creators].sort((a, b) => (b.endorsements || 0) - (a.endorsements || 0))[0];

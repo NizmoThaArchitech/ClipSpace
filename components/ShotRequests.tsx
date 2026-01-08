@@ -1,12 +1,12 @@
 
 import React from 'react';
 import type { Theme } from '../App';
-import { MOCK_PROJECT_REQUESTS, MOCK_BIDS } from '../constants';
+import { MOCK_PROJECT_REQUESTS } from '../constants';
 import { GavelIcon } from './icons/GavelIcon';
 import { DollarIcon } from './icons/DollarIcon';
 import { CalendarIcon } from './icons/CalendarIcon';
 
-const ShotRequests: React.FC<{ theme: Theme }> = ({ theme }) => {
+const ShotRequests: React.FC<{ theme: Theme }> = ({ theme: _theme }) => {
 
   return (
     <div className="p-4 sm:p-6 lg:p-8 space-y-8">

@@ -1,7 +1,7 @@
 
-import React, { useState, useEffect, useRef } from 'react';
+import React, { useState, useEffect } from 'react';
 import type { Theme } from '../App';
-import { MOCK_PROJECT_TASKS, MOCK_USERS } from '../constants';
+import { MOCK_PROJECT_TASKS } from '../constants';
 import type { ProjectTask } from '../types';
 import { PlusIcon } from './icons/PlusIcon';
 import { TrashIcon } from './icons/TrashIcon';
@@ -87,7 +87,7 @@ const ProjectTaskCard: React.FC<{ task: ProjectTask, onDelete: (id: string) => v
     );
 }
 
-const MyProjects: React.FC<{ theme: Theme }> = ({ theme }) => {
+const MyProjects: React.FC<{ theme: Theme }> = ({ theme: _theme }) => {
     const allInitialTasks = [...MOCK_PROJECT_TASKS['To-Do'], ...MOCK_PROJECT_TASKS['In Progress'], ...MOCK_PROJECT_TASKS['Done']];
     const [tasks, setTasks] = useState<ProjectTask[]>(allInitialTasks);
     const [notes, setNotes] = useState("• Remind AeroVisions about the drone licensing fee\n• Finalize color grade for Japan vlog\n• Review CSpace Video Suite export bitrates");

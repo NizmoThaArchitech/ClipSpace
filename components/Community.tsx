@@ -21,7 +21,7 @@ interface CommunityProps {
 }
 
 /* Updated component to accept theme and setCurrentView props */
-const Community: React.FC<CommunityProps> = ({ theme, setCurrentView }) => {
+const Community: React.FC<CommunityProps> = ({ theme: _theme, setCurrentView }) => {
 
   const getIcon = (iconName: string) => {
     const iconClass = "w-8 h-8 text-indigo-400";

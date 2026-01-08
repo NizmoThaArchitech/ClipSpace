@@ -1,0 +1,4 @@
+requests==2.32.5
+certifi==2026.1.4
+pyright==1.1.293
+flake8==6.2.1

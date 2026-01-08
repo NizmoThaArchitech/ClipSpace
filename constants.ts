@@ -549,7 +549,7 @@ export const TUTORIAL_STEPS = [
         position: { top: '100px', left: '15rem' },
         arrow: { bottom: '-0.75rem', left: '50%', transform: 'translateX(-50%) rotate(-135deg)' },
         awaitsAction: 'none',
-        action: ({setActiveTab}: any) => setActiveTab('co-director')
+        action: ({ setActiveTab }: { setActiveTab: (tab: string) => void }) => setActiveTab('co-director')
     },
      {
         id: 6,
